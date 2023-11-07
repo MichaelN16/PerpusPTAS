@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginBottom="5dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp"
+    app:contentPadding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--To show pdf and progress for pdf load-->
+        <RelativeLayout
+            android:id="@+id/pdfRl"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:background="@color/gray02"
+            android:layout_marginEnd="5dp">
+
+            <!--Book View-->
+            <ImageView
+                android:id="@+id/coverBook"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+
+        <!--TextView: Book Title-->
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:text="Judul Buku"
+            android:layout_toEndOf="@id/pdfRl"
+            android:maxLines="1"/>
+        <!--TextView: Book Description-->
+        <TextView
+            android:id="@+id/descriptionTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:text="Deskripsi Buku"
+            android:layout_toEndOf="@id/pdfRl"
+            android:layout_below="@id/titleTv"
+            android:maxLines="4"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"/>
+
+        <!--TextVie: Book Category-->
+        <TextView
+            android:id="@+id/categoryTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:text="Kategori"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"/>
+
+        <!--TextView:  keterangan Stock-->
+        <TextView
+            android:id="@+id/stockTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:text="Stok : "
+            android:layout_toEndOf="@id/pdfRl"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"/>
+
+        <!--TextView: Book added date-->
+        <TextView
+            android:id="@+id/stockCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_toEndOf="@id/stockTv"
+            android:layout_toStartOf="@id/categoryTv"
+            android:text="N/A"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

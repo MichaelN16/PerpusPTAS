@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Perpustakaan Perkantas Semarang</string>
+    <string name="new_user_signup">Belum Memiliki Akun? Silahkan Daftar!</string>
+    <string name="selected_item">Komponen :</string>
+
+    <string-array name="Komponen">
+        <item>Pelayanan Siswa</item>
+        <item>Pelayanan Mahasiswa</item>
+        <item>Pelayanan Alumni</item>
+    </string-array>
+</resources>
