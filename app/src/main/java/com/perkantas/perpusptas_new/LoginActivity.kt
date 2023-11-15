@@ -9,6 +9,7 @@ import android.util.Patterns
 import android.widget.Toast
 import com.perkantas.perpusptas_new.Auth.LoginRequest
 import com.perkantas.perpusptas_new.Auth.LoginResponse
+import com.perkantas.perpusptas_new.Constants.BASE_URL
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -77,25 +78,38 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser() {
+        progressDialog.setMessage("Mencoba Login...")
+
         apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Log.e(TAG, "Login gagal karena ${t.message}")
+                    progressDialog.dismiss()
                     Toast.makeText(this@LoginActivity,"Gagal masuk akun karena ${t.message} ", Toast.LENGTH_SHORT).show()
                 }
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    val loginResponse = response.body()
-
-                    if (loginResponse?.statusCode == true && loginResponse.dataLog.authToken != null){
-                        //coba myprofile
-                        Log.e(TAG, "token: " + loginResponse.dataLog.authToken) //login token nanti diakses ke myprofile untuk akses data user
-                        sessionManager.saveAuthToken(loginResponse.dataLog.authToken)
-                        Toast.makeText(this@LoginActivity,"Berhasil Masuk akun", Toast.LENGTH_LONG).show()
-                        startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
-                        finish()
-                    }
-                    else{
-                        Log.e(TAG, "onResponse: " + response.body())
-                        Toast.makeText(this@LoginActivity,"Gagal masuk akun", Toast.LENGTH_LONG).show()
+                    if (response.isSuccessful) {
+                        val loginResponse = response.body()
+                        if (loginResponse?.statusCode == true && loginResponse.dataLog?.authToken != null) {
+                            // Login success
+                            Log.d(TAG, "Login successful. AuthToken: ${loginResponse.dataLog.authToken}")
+                            sessionManager.saveAuthToken(loginResponse.dataLog.authToken)
+                            progressDialog.dismiss()
+                            Toast.makeText(this@LoginActivity, "Berhasil Masuk akun, selamat datang " + loginResponse.dataLog.name, Toast.LENGTH_LONG).show()
+                            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                            finish()
+                        } else {
+                            progressDialog.dismiss()
+                            Log.d(TAG, "Login failed. Response: ${response.body()}")
+                            Toast.makeText(this@LoginActivity, "Gagal masuk akun", Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        //response failure untuk salah password/koneksi error/dll
+                        progressDialog.dismiss()
+                        Log.d(TAG, "Login failed. Response code: ${response.code()}")
+                        Log.d(TAG, "Response: ${response.raw().toString()}")
+                        Log.d(TAG, "Response body: ${response.body()}")
+                        Toast.makeText(this@LoginActivity, "Gagal masuk akun. Code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
             })

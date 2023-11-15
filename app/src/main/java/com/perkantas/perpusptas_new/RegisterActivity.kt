@@ -55,13 +55,14 @@ class RegisterActivity : AppCompatActivity() {
     private var name = ""
     private var email = ""
     private var password = ""
+    private var cPassword = ""
 
     private fun validateData() {
         //Input, gather all user information data
-        val name = binding.nameEt.text.toString().trim()
-        val email = binding.emailEt.text.toString().trim()
-        val password = binding.passwordEt.text.toString().trim()
-        val cPassword = binding.cPasswordEt.text.toString().trim()
+        name = binding.nameEt.text.toString().trim()
+        email = binding.emailEt.text.toString().trim()
+        password = binding.passwordEt.text.toString().trim()
+        cPassword = binding.cPasswordEt.text.toString().trim()
 
         //Validate Data, to prevent empty or unvalidate data
         if (name.isEmpty()) {
@@ -90,9 +91,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun createUserAccount() {
-        apiClient.getApiService(this).register(RegisterRequest(name=name, email=email, password = password, cPassword = password))
+        progressDialog.setMessage("Membuat Akun...")
+        progressDialog.show()
+        val registerRequest = RegisterRequest(name, email, password,cPassword)
+
+        apiClient.getApiService(this).register(registerRequest)
             .enqueue(object : Callback<RegisterResponse>{
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    progressDialog.dismiss()
                     Toast.makeText(this@RegisterActivity,"Gagal mendaftarkan karena ${t.message} ", Toast.LENGTH_SHORT).show()
                 }
                 override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
@@ -100,11 +106,17 @@ class RegisterActivity : AppCompatActivity() {
 
                     if (registerResponse?.statusCode==true && registerResponse.dataReg.authToken !=null){
                         sessionManager.saveAuthToken(registerResponse.dataReg.authToken)
+                        progressDialog.dismiss()
+                        Toast.makeText(this@RegisterActivity, "Berhasil membuat akun, silahkan Login", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                         finish()
                     }
                     else{
-                        Log.d(TAG, "Response : " + response.body())
+                        //response untuk email sudah dipakai/password kurang sesuai aturan/dll
+                        Log.d(TAG, "Login failed. Response code: ${response.code()}")
+                        Log.d(TAG, "Response: ${response.raw().toString()}")
+                        Log.d(TAG, "Response body: ${response.body()}")
+                        progressDialog.dismiss()
                         Toast.makeText(this@RegisterActivity,"Gagal mendaftarkan akun", Toast.LENGTH_SHORT).show()
                     }
                 }
