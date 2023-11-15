@@ -4,11 +4,11 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import com.perkantas.perpusptas_new.Interface.ApiService
-import com.perkantas.perpusptas_new.Model.LoginRequest
-import com.perkantas.perpusptas_new.Model.LoginResponse
+import com.perkantas.perpusptas_new.Auth.LoginRequest
+import com.perkantas.perpusptas_new.Auth.LoginResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.databinding.ActivityLoginBinding
 import retrofit2.Call
@@ -22,6 +22,12 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
+
+    val Any.TAG: String
+    get(){
+        val tag = javaClass.simpleName
+        return if (tag.length <=23) tag else tag.substring(0, 23)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,43 +77,28 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUser() {
-
         apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Toast.makeText(this@LoginActivity,"Gagal masuk akun karena ${t.message} ", Toast.LENGTH_SHORT).show()
                 }
-
-                override fun onResponse( call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     val loginResponse = response.body()
 
-                    if (loginResponse?.statusCode == 200 && loginResponse.authToken != null){
-                        sessionManager.saveAuthToken(loginResponse.authToken)
+                    if (loginResponse?.statusCode == true && loginResponse.dataLog.authToken != null){
+                        //coba myprofile
+                        Log.e(TAG, "token: " + loginResponse.dataLog.authToken) //login token nanti diakses ke myprofile untuk akses data user
+                        sessionManager.saveAuthToken(loginResponse.dataLog.authToken)
+                        Toast.makeText(this@LoginActivity,"Berhasil Masuk akun", Toast.LENGTH_LONG).show()
                         startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                        finish()
                     }
                     else{
-                        Toast.makeText(this@LoginActivity,"Gagal masuk akun", Toast.LENGTH_SHORT).show()
-
+                        Log.e(TAG, "onResponse: " + response.body())
+                        Toast.makeText(this@LoginActivity,"Gagal masuk akun", Toast.LENGTH_LONG).show()
                     }
                 }
             })
-
-        /*val context = this
-
-        val request = LoginRequest(email = email, password = password)
-        val apiClient = ApiClient().getRetrofitClientInstance().create(ApiService::class.java)
-        apiClient.login(request).enqueue(object : Callback<LoginResponse>{
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                Toast.makeText(context, "Login Berhasil", Toast.LENGTH_SHORT).show()
-
-                startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(context,"Gagal masuk akun karena ${t.message} ", Toast.LENGTH_SHORT).show()
-            }
-
-        })*/
     }
 
 }

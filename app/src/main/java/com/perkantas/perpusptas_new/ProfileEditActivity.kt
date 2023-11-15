@@ -17,5 +17,14 @@ class ProfileEditActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+        //handle update profile
+        binding.updateBtn.setOnClickListener {
+            updateProfile()
+        }
+
+    }
+
+    private fun updateProfile() {
+        TODO("Not yet implemented")
     }
 }

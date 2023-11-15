@@ -138,44 +138,19 @@
                 android:textColor="@color/black"
                 android:padding="10dp"
                 android:textColorHint="@color/gray01"
-                android:hint="Nomor Whatsapp"/>
+                android:hint="Nomor Telepon"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <!--Input Komponen-->
-        <Spinner
-            android:id="@+id/komponenSpin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/numberTil"
-            android:background="@drawable/shape_edittext01"
-            android:drawableStart="@drawable/ic_group_gray"
-            android:drawablePadding="10dp"
-            android:inputType=""
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:textColorHint="@color/gray01"
-            android:text="Pilih Asal Komponen">
-        <!--            <TextView-->
-            <!--                android:id="@+id/komponenTv"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:background="@drawable/shape_edittext01"-->
-            <!--                android:drawableStart="@drawable/ic_group_gray"-->
-            <!--                android:drawablePadding="10dp"-->
-            <!--                android:inputType=""-->
-            <!--                android:textColor="@color/black"-->
-            <!--                android:padding="10dp"-->
-            <!--                android:textColorHint="@color/gray01"-->
-            <!--                android:text="Pilih Asal Komponen"/>-->
-        </Spinner>
+
 
         <!--Button: update profile-->
         <Button
             android:id="@+id/updateBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/komponenSpin"
+            android:layout_below="@id/numberTil"
             android:layout_marginTop="20dp"
             android:background="@drawable/shape_button01"
             android:text="Perbarui"

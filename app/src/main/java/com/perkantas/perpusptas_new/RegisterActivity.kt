@@ -4,14 +4,30 @@ import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import com.perkantas.perpusptas_new.Auth.RegisterRequest
+import com.perkantas.perpusptas_new.Auth.RegisterResponse
+import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.databinding.ActivityRegisterBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
 
     private lateinit var progressDialog: ProgressDialog
+
+    private lateinit var sessionManager: SessionManager
+    private lateinit var apiClient: ApiClient
+
+    val Any.TAG: String
+        get(){
+            val tag = javaClass.simpleName
+            return if (tag.length <=23) tag else tag.substring(0, 23)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +37,9 @@ class RegisterActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         progressDialog.setTitle("Mohon Tunggu")
         progressDialog.setCanceledOnTouchOutside(false)
+
+        apiClient = ApiClient()
+        sessionManager = SessionManager(this)
 
         //handle click, back btn
         binding.backBtn.setOnClickListener {
@@ -46,26 +65,49 @@ class RegisterActivity : AppCompatActivity() {
 
         //Validate Data, to prevent empty or unvalidate data
         if (name.isEmpty()) {
-            Toast.makeText(this, "Harap masukkan nama Anda", Toast.LENGTH_SHORT).show()
+            binding.nameEt.error = "Harap masukkan nama Anda"
+            binding.nameEt.requestFocus()
+            return
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Toast.makeText(this, "Masukkan email yang valid", Toast.LENGTH_SHORT).show()
+            binding.emailEt.error = "Masukkan email yang valid"
+            binding.emailEt.requestFocus()
+            return
         } else if (password.isEmpty()) {
-            Toast.makeText(this, "Masukkan password", Toast.LENGTH_SHORT).show()
+            binding.passwordEt.error = "Masukkan password"
+            binding.passwordEt.requestFocus()
+            return
         } else if (cPassword.isEmpty()) {
-            Toast.makeText(this, "Konfirmasi password", Toast.LENGTH_SHORT).show()
+            binding.cPasswordEt.error = "Konfirmasi password"
+            binding.cPasswordEt.requestFocus()
+            return
         } else if (password != cPassword){
-            Toast.makeText(this, "Password tidak sesuai", Toast.LENGTH_SHORT).show()
+            binding.cPasswordEt.error = "Password tidak sesuai"
+            binding.cPasswordEt.requestFocus()
+            return
         } else {
             createUserAccount()
         }
     }
 
     private fun createUserAccount() {
+        apiClient.getApiService(this).register(RegisterRequest(name=name, email=email, password = password, cPassword = password))
+            .enqueue(object : Callback<RegisterResponse>{
+                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    Toast.makeText(this@RegisterActivity,"Gagal mendaftarkan karena ${t.message} ", Toast.LENGTH_SHORT).show()
+                }
+                override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+                    val registerResponse = response.body()
 
+                    if (registerResponse?.statusCode==true && registerResponse.dataReg.authToken !=null){
+                        sessionManager.saveAuthToken(registerResponse.dataReg.authToken)
+                        startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+                        finish()
+                    }
+                    else{
+                        Log.d(TAG, "Response : " + response.body())
+                        Toast.makeText(this@RegisterActivity,"Gagal mendaftarkan akun", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            })
     }
-
-    private fun updateUserInfo() {
-
-    }
-
 }

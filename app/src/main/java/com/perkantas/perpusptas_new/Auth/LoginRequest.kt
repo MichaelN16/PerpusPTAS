@@ -1,4 +1,4 @@
-package com.perkantas.perpusptas_new.Model
+package com.perkantas.perpusptas_new.Auth
 
 import com.google.gson.annotations.SerializedName
 

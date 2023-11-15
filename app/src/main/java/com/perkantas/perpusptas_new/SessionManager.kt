@@ -11,7 +11,6 @@ class SessionManager (context: Context) {
     }
 
     //func to save auth token
-
     fun saveAuthToken(token: String){
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, token)

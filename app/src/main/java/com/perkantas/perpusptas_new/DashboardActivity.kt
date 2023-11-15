@@ -2,6 +2,7 @@ package com.perkantas.perpusptas_new
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sessionManager = SessionManager(this)
+        checkUser()
 
         //setupWithViewPagerAdapter(binding.viewPager)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
@@ -34,6 +36,11 @@ class DashboardActivity : AppCompatActivity() {
         binding.profileBtn.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
+
+    }
+
+    private fun checkUser() {
+        val email = SessionManager.USER_TOKEN
 
     }
 
