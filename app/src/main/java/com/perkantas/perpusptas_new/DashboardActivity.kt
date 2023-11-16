@@ -1,13 +1,10 @@
 package com.perkantas.perpusptas_new
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import android.util.Log
+import android.view.View
 import androidx.viewpager.widget.ViewPager
 import com.perkantas.perpusptas_new.databinding.ActivityDashboardBinding
 
@@ -30,18 +27,29 @@ class DashboardActivity : AppCompatActivity() {
         //handle click, logout btn
         binding.logoutBtn.setOnClickListener {
             sessionManager.deleteAuthToken()
-            startActivity(Intent(this, MainActivity::class.java))
+            sessionManager.clearUserData()
+
+            startActivity(Intent(this, LandingActivity::class.java))
         }
         //handle click, profile btn
         binding.profileBtn.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
-
     }
 
     private fun checkUser() {
-        val email = SessionManager.USER_TOKEN
+        if(sessionManager.isLoggedIn()){
+            val email = sessionManager.fetchAuthToken()
+            Log.d("Session Manager", "Retreived email : $email")
+            binding.subtitleTv.text = email
 
+            binding.profileBtn.visibility = View.VISIBLE
+            binding.logoutBtn.visibility = View.VISIBLE
+        } else{
+            binding.subtitleTv.text = "Belum masuk akun"
+            binding.profileBtn.visibility = View.GONE
+            binding.logoutBtn.visibility = View.GONE
+        }
     }
 
     private fun setupWithViewPagerAdapter(viewPager: ViewPager) {

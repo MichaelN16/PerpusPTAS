@@ -5,20 +5,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.perkantas.perpusptas_new.Model.PostsResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
+import com.perkantas.perpusptas_new.databinding.ActivityLandingBinding
 import com.perkantas.perpusptas_new.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class LandingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLandingBinding
 
     private lateinit var apiClient: ApiClient
     private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityLandingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         apiClient = ApiClient()
@@ -33,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         binding.skipBtn.setOnClickListener {
             startActivity(Intent(this, DashboardActivity::class.java))
         }
-
     }
 
     private fun fetchPosts(){

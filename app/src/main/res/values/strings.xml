@@ -8,4 +8,10 @@
         <item>Pelayanan Mahasiswa</item>
         <item>Pelayanan Alumni</item>
     </string-array>
+
+    <string name="title_library">Perpustakaan</string>
+    <string name="title_history">Riwayat</string>
+    <string name="title_notification">Notifikasi</string>
+    <string name="title_account">Akun</string>
+
 </resources>

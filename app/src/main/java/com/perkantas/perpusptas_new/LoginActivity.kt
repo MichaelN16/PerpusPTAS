@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import com.perkantas.perpusptas_new.Activity.MainActivity
 import com.perkantas.perpusptas_new.Auth.LoginRequest
 import com.perkantas.perpusptas_new.Auth.LoginResponse
 import com.perkantas.perpusptas_new.Constants.BASE_URL
@@ -79,8 +80,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser() {
         progressDialog.setMessage("Mencoba Login...")
+        progressDialog.show()
 
-        apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        progressDialog.dismiss()
+
+        /*apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse>{
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e(TAG, "Login gagal karena ${t.message}")
@@ -96,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
                             sessionManager.saveAuthToken(loginResponse.dataLog.authToken)
                             progressDialog.dismiss()
                             Toast.makeText(this@LoginActivity, "Berhasil Masuk akun, selamat datang " + loginResponse.dataLog.name, Toast.LENGTH_LONG).show()
-                            startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         } else {
                             progressDialog.dismiss()
@@ -109,10 +114,11 @@ class LoginActivity : AppCompatActivity() {
                         Log.d(TAG, "Login failed. Response code: ${response.code()}")
                         Log.d(TAG, "Response: ${response.raw().toString()}")
                         Log.d(TAG, "Response body: ${response.body()}")
+                        Log.e(TAG, "Base Url : $BASE_URL")
                         Toast.makeText(this@LoginActivity, "Gagal masuk akun. Code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
-            })
+            })*/
     }
 
 }

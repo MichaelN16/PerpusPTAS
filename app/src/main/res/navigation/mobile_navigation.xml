@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_library">
+
+    <fragment
+        android:id="@+id/navigation_libraryNav"
+        android:name="com.perkantas.perpusptas_new.Fragment.PerpustakaanFragment"
+        android:label="@string/title_library"
+        tools:layout="@layout/fragment_perpustakaan" />
+
+    <fragment
+        android:id="@+id/navigation_historyNav"
+        android:name="com.perkantas.perpusptas_new.Fragment.RiwayatFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_riwayat" />
+
+    <fragment
+        android:id="@+id/navigation_notificationsNav"
+        android:name="com.perkantas.perpusptas_new.Fragment.NotifikasiFragment"
+        android:label="@string/title_notification"
+        tools:layout="@layout/fragment_notifikasi" />
+
+    <fragment
+        android:id="@+id/navigation_accountNav"
+        android:name="com.perkantas.perpusptas_new.Fragment.AkunFragment"
+        android:label="@string/title_account"
+        tools:layout="@layout/fragment_akun" />
+</navigation>
