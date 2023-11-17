@@ -6,7 +6,6 @@ import android.os.Bundle
 import com.perkantas.perpusptas_new.Model.PostsResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.databinding.ActivityLandingBinding
-import com.perkantas.perpusptas_new.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

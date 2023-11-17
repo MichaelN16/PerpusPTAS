@@ -82,11 +82,11 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setMessage("Mencoba Login...")
         progressDialog.show()
 
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        progressDialog.dismiss()
+        /*startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        progressDialog.dismiss()*/
 
-        /*apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
-            .enqueue(object : Callback<LoginResponse>{
+        apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
+            .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e(TAG, "Login gagal karena ${t.message}")
                     progressDialog.dismiss()
@@ -118,7 +118,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity, "Gagal masuk akun. Code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
-            })*/
+            })
     }
 
 }

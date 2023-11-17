@@ -11,12 +11,14 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
+    //login
     @POST(Constants.LOGIN_URL)
-    //@FormUrlEncoded
     fun login (@Body request: LoginRequest): Call<LoginResponse>
 
+    //register
     @POST(Constants.REGISTER_URL)
     fun register(@Body request: RegisterRequest): Call<RegisterResponse>
+
 
     @GET(Constants.POSTS_URL)
     fun fetchPosts(): Call<PostsResponse>
@@ -24,4 +26,13 @@ interface ApiService {
     //books
     @GET(Constants.BOOK_URL)
     fun getAllBooks(): Call<List<Book>>
+
+    /*//get user profile
+    @GET(Constants.PROFILE_URL)
+    fun getMyProfile(): Call<>
+
+    //update user profile
+    @POST(Constants.POSTS_URL)
+    fun updateMyProfile(@Body request: ProfileRequest): Call<>*/
+
 }

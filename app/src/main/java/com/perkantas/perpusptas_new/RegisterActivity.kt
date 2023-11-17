@@ -95,6 +95,9 @@ class RegisterActivity : AppCompatActivity() {
         progressDialog.show()
         val registerRequest = RegisterRequest(name, email, password,cPassword)
 
+        /*startActivity(Intent(this, LoginActivity::class.java))
+        progressDialog.dismiss()*/
+
         apiClient.getApiService(this).register(registerRequest)
             .enqueue(object : Callback<RegisterResponse>{
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {

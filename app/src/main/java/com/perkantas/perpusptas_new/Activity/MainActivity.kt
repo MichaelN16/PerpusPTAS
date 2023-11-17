@@ -8,20 +8,20 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.perkantas.perpusptas_new.Fragment.AkunFragment
-import com.perkantas.perpusptas_new.Fragment.NotifikasiFragment
-import com.perkantas.perpusptas_new.Fragment.PerpustakaanFragment
-import com.perkantas.perpusptas_new.Fragment.RiwayatFragment
+import com.perkantas.perpusptas_new.Fragment.AccountFragment
+import com.perkantas.perpusptas_new.Fragment.NotificationFragment
+import com.perkantas.perpusptas_new.Fragment.LibraryFragment
+import com.perkantas.perpusptas_new.Fragment.HistoryFragment
 import com.perkantas.perpusptas_new.R
 import com.perkantas.perpusptas_new.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private val fragmentLibrary: Fragment = PerpustakaanFragment()
-    private val fragmentHistory: Fragment = RiwayatFragment()
-    private val fragmentNotification: Fragment = NotifikasiFragment()
-    private val fragmentAccount: Fragment = AkunFragment()
+    private val fragmentLibrary: Fragment = LibraryFragment()
+    private val fragmentHistory: Fragment = HistoryFragment()
+    private val fragmentNotification: Fragment = NotificationFragment()
+    private val fragmentAccount: Fragment = AccountFragment()
     val fm: FragmentManager = supportFragmentManager
     var active: Fragment = fragmentLibrary
 

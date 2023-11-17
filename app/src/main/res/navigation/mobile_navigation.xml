@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_libraryNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.PerpustakaanFragment"
+        android:name="com.perkantas.perpusptas_new.Fragment.LibraryFragment"
         android:label="@string/title_library"
-        tools:layout="@layout/fragment_perpustakaan" />
+        tools:layout="@layout/fragment_library" />
 
     <fragment
         android:id="@+id/navigation_historyNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.RiwayatFragment"
+        android:name="com.perkantas.perpusptas_new.Fragment.HistoryFragment"
         android:label="@string/title_history"
-        tools:layout="@layout/fragment_riwayat" />
+        tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_notificationsNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.NotifikasiFragment"
+        android:name="com.perkantas.perpusptas_new.Fragment.NotificationFragment"
         android:label="@string/title_notification"
-        tools:layout="@layout/fragment_notifikasi" />
+        tools:layout="@layout/fragment_notification" />
 
     <fragment
         android:id="@+id/navigation_accountNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.AkunFragment"
+        android:name="com.perkantas.perpusptas_new.Fragment.AccountFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_akun" />
+        tools:layout="@layout/fragment_account" />
 </navigation>
