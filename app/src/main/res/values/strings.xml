@@ -3,15 +3,22 @@
     <string name="new_user_signup">Belum Memiliki Akun? Silahkan Daftar!</string>
     <string name="selected_item">Komponen :</string>
 
-    <string-array name="Komponen">
+    <string-array name="komponen">
         <item>Pelayanan Siswa</item>
         <item>Pelayanan Mahasiswa</item>
         <item>Pelayanan Alumni</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Laki-Laki</item>
+        <item>Perempuan</item>
     </string-array>
 
     <string name="title_library">Perpustakaan</string>
     <string name="title_history">Riwayat</string>
     <string name="title_notification">Notifikasi</string>
     <string name="title_account">Akun</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

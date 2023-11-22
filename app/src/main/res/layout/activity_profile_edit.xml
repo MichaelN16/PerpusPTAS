@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back01"
-    tools:context=".ProfileEditActivity">
+    tools:context=".Activity.ProfileEditActivity">
 
     <!--Toolbar-->
     <RelativeLayout
@@ -77,20 +77,63 @@
                 android:textColorHint="@color/gray01"
                 android:hint="Nama"/>
         </com.google.android.material.textfield.TextInputLayout>
+<!--
+        &lt;!&ndash;Input Gender&ndash;&gt;
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/genderTil"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_below="@id/nameTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false">
+            <AutoCompleteTextView
+                android:id="@+id/genderAc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edittext01"
+                android:drawableStart="@drawable/ic_gender_gray"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:hint="Jenis Kelamin"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray01"/>
+        </com.google.android.material.textfield.TextInputLayout>-->
 
-        <!--Input Date of Birth-->
+        <!--Input Address-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/addressTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nameTil"
+            app:hintEnabled="false">
+            <EditText
+                android:id="@+id/addressEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edittext01"
+                android:drawableStart="@drawable/ic_location_gray"
+                android:drawablePadding="10dp"
+                android:inputType="textPersonName|textCapWords"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textColorHint="@color/gray01"
+                android:hint="Alamat"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--Input Place of Birth-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/birthPlaceTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/nameTil"
+            android:layout_below="@id/addressTil"
             app:hintEnabled="false">
             <EditText
                 android:id="@+id/birthPlaceEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_edittext01"
-                android:drawableStart="@drawable/ic_calendar_gray"
+                android:drawableStart="@drawable/ic_location_gray"
                 android:drawablePadding="10dp"
                 android:inputType="textPersonName|textCapWords"
                 android:textColor="@color/black"
@@ -113,7 +156,7 @@
                 android:background="@drawable/shape_edittext01"
                 android:drawableStart="@drawable/ic_calendar_gray"
                 android:drawablePadding="10dp"
-                android:inputType="datetime"
+                android:inputType="text|number"
                 android:textColor="@color/black"
                 android:padding="10dp"
                 android:textColorHint="@color/gray01"
@@ -127,6 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/birthTil"
             app:hintEnabled="false">
+
             <EditText
                 android:id="@+id/numberEt"
                 android:layout_width="match_parent"
@@ -134,23 +178,41 @@
                 android:background="@drawable/shape_edittext01"
                 android:drawableStart="@drawable/ic_phone_gray"
                 android:drawablePadding="10dp"
+                android:hint="Nomor Telepon"
                 android:inputType="phone"
-                android:textColor="@color/black"
                 android:padding="10dp"
-                android:textColorHint="@color/gray01"
-                android:hint="Nomor Telepon"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray01" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <!--Input Komponen-->
-
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/componentTil"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_below="@id/numberTil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false">
+            <AutoCompleteTextView
+                android:id="@+id/componentAc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_edittext01"
+                android:drawableStart="@drawable/ic_category_gray"
+                android:drawablePadding="10dp"
+                android:padding="10dp"
+                android:hint="Asal Komponen"
+                android:inputType="none"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray01"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--Button: update profile-->
         <Button
             android:id="@+id/updateBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/numberTil"
+            android:layout_below="@id/componentTil"
             android:layout_marginTop="20dp"
             android:background="@drawable/shape_button01"
             android:text="Perbarui"

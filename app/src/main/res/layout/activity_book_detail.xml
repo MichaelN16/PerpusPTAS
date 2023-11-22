@@ -220,7 +220,6 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/design_default_color_primary">
-
         <!--Read book button-->
         <Button
             android:id="@+id/rentBookBtn"
@@ -230,7 +229,6 @@
             android:text="Ajukan Peminjaman"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_book_white"/>
-
         <!--Add/Remove Favorite Button-->
         <Button
             android:id="@+id/favoriteBtn"

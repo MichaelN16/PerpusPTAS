@@ -1,9 +1,10 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.perkantas.perpusptas_new.R
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -12,25 +12,23 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <!--To show pdf and progress for pdf load-->
         <RelativeLayout
-            android:id="@+id/pdfRl"
+            android:id="@+id/bookRl"
             android:layout_width="100dp"
             android:layout_height="140dp"
             android:background="@color/gray02"
             android:layout_marginEnd="5dp">
-
             <!--Book View-->
             <ImageView
                 android:id="@+id/coverBook"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
-
             <ProgressBar
                 android:id="@+id/progressBar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:visibility="visible"/>
         </RelativeLayout>
 
         <!--TextView: Book Title-->
@@ -40,8 +38,9 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:text="Judul Buku"
-            android:layout_toEndOf="@id/pdfRl"
+            android:layout_toEndOf="@id/bookRl"
             android:maxLines="1"/>
+
         <!--TextView: Book Description-->
         <TextView
             android:id="@+id/descriptionTv"
@@ -49,13 +48,47 @@
             android:layout_height="wrap_content"
             style="@style/TextAppearance.MaterialComponents.Body2"
             android:text="Deskripsi Buku"
-            android:layout_toEndOf="@id/pdfRl"
+            android:layout_toEndOf="@id/bookRl"
             android:layout_below="@id/titleTv"
             android:maxLines="4"
             android:layout_marginTop="8dp"
             android:ellipsize="end"/>
 
-        <!--TextVie: Book Category-->
+        <!--TextView:  keterangan Stock-->
+        <TextView
+            android:id="@+id/stockTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:text="Stok : "
+            android:layout_toEndOf="@id/bookRl"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"/>
+
+        <!--TextView: Stock-->
+        <TextView
+            android:id="@+id/stockCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_toEndOf="@id/stockTv"
+            android:text="N/A"
+            android:layout_alignParentBottom="true"
+            android:maxLines="1"/>
+
+        <!--TextView: Book Code-->
+        <TextView
+            android:id="@+id/codeBookTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:text="XXXX"
+            android:layout_toStartOf="@id/categoryTv"
+            android:layout_toEndOf="@id/stockCountTv"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="center"/>
+
+        <!--TextView: Book Category-->
         <TextView
             android:id="@+id/categoryTv"
             android:layout_width="wrap_content"
@@ -65,28 +98,5 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:maxLines="1"/>
-
-        <!--TextView:  keterangan Stock-->
-        <TextView
-            android:id="@+id/stockTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.MaterialComponents.Caption"
-            android:text="Stok : "
-            android:layout_toEndOf="@id/pdfRl"
-            android:layout_alignParentBottom="true"
-            android:maxLines="1"/>
-
-        <!--TextView: Book added date-->
-        <TextView
-            android:id="@+id/stockCountTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/TextAppearance.MaterialComponents.Caption"
-            android:layout_toEndOf="@id/stockTv"
-            android:layout_toStartOf="@id/categoryTv"
-            android:text="N/A"
-            android:layout_alignParentBottom="true"/>
-
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

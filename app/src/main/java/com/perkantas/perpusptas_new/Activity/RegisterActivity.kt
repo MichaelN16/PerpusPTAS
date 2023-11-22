@@ -1,4 +1,4 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Activity
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.perkantas.perpusptas_new.Auth.RegisterRequest
 import com.perkantas.perpusptas_new.Auth.RegisterResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
+import com.perkantas.perpusptas_new.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -66,25 +67,15 @@ class RegisterActivity : AppCompatActivity() {
 
         //Validate Data, to prevent empty or unvalidate data
         if (name.isEmpty()) {
-            binding.nameEt.error = "Harap masukkan nama Anda"
-            binding.nameEt.requestFocus()
-            return
+            Toast.makeText(this, "Masukkan nama Anda", Toast.LENGTH_SHORT).show()
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.emailEt.error = "Masukkan email yang valid"
-            binding.emailEt.requestFocus()
-            return
+            Toast.makeText(this, "Masukkan email yang valid", Toast.LENGTH_SHORT).show()
         } else if (password.isEmpty()) {
-            binding.passwordEt.error = "Masukkan password"
-            binding.passwordEt.requestFocus()
-            return
+            Toast.makeText(this, "Masukkan password", Toast.LENGTH_SHORT).show()
         } else if (cPassword.isEmpty()) {
-            binding.cPasswordEt.error = "Konfirmasi password"
-            binding.cPasswordEt.requestFocus()
-            return
+            Toast.makeText(this, "Masukkan lagi password Anda", Toast.LENGTH_SHORT).show()
         } else if (password != cPassword){
-            binding.cPasswordEt.error = "Password tidak sesuai"
-            binding.cPasswordEt.requestFocus()
-            return
+            Toast.makeText(this, "Password tidak sesuai", Toast.LENGTH_SHORT).show()
         } else {
             createUserAccount()
         }

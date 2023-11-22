@@ -1,10 +1,11 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.perkantas.perpusptas_new.Model.PostsResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
+import com.perkantas.perpusptas_new.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityLandingBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,7 +32,7 @@ class LandingActivity : AppCompatActivity() {
 
         //handle click skip button
         binding.skipBtn.setOnClickListener {
-            startActivity(Intent(this, DashboardActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
     }
 

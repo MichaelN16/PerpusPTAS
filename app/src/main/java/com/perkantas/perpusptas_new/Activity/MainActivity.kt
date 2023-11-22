@@ -1,9 +1,10 @@
 package com.perkantas.perpusptas_new.Activity
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,10 +14,13 @@ import com.perkantas.perpusptas_new.Fragment.NotificationFragment
 import com.perkantas.perpusptas_new.Fragment.LibraryFragment
 import com.perkantas.perpusptas_new.Fragment.HistoryFragment
 import com.perkantas.perpusptas_new.R
+import com.perkantas.perpusptas_new.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var sessionManager: SessionManager
 
     private val fragmentLibrary: Fragment = LibraryFragment()
     private val fragmentHistory: Fragment = HistoryFragment()
@@ -34,7 +38,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sessionManager = SessionManager(this)
+        //fungsi untuk melihat user login/tidak, dan untuk menampilkan nama
+        checkUser()
+
+        //mengaktifkan fungsi bottom nav
         setUpBottomNav()
+
+        //in first launch, set toolbar fragment title to perpustakaan
+        binding.fragmentsTv.text = "Perpustakaan"
+
+        //logout button function
+        binding.logoutBtn.setOnClickListener {
+            sessionManager.deleteAuthToken()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun checkUser() {
+        if(sessionManager.isLoggedIn()){
+            val data = sessionManager.fetchDataLog()
+            binding.usernameTv.text = data.name
+
+            binding.logoutBtn.visibility = View.VISIBLE
+        } else{
+            binding.usernameTv.text = "Belum masuk akun"
+            binding.logoutBtn.visibility = View.GONE
+        }
     }
 
     private fun setUpBottomNav() {
@@ -49,33 +80,31 @@ class MainActivity : AppCompatActivity() {
         menuItem.isChecked = true
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-
             when(item.itemId){
                 R.id.navigation_library->{
-                    Log.d("Response","Perpustakaan")
-                    callFragment(0, fragmentLibrary)
+                    callFragment(0, fragmentLibrary,"Perpustakaan")
                 }
                 R.id.navigation_history->{
-                    Log.d("Response","Riwayat")
-                    callFragment(1, fragmentHistory)
+                    callFragment(1, fragmentHistory, "Riwayat")
                 }
                 R.id.navigation_notifications->{
-                    Log.d("Response","Notifikasi")
-                    callFragment(2, fragmentNotification)
+                    callFragment(2, fragmentNotification, "Notifikasi")
                 }
                 R.id.navigation_account->{
-                    Log.d("Response","Akun")
-                    callFragment(3, fragmentAccount)
+                    callFragment(3, fragmentAccount, "Akun")
                 }
             }
             false
         }
     }
 
-    private fun callFragment(int: Int, fragment: Fragment){
-        menuItem = menu.getItem(int)
+    private fun callFragment(index: Int, fragment: Fragment, title: String){
+        menuItem = menu.getItem(index)
         menuItem.isChecked = true
         fm.beginTransaction().hide(active).show(fragment).commit()
         active = fragment
+
+        //set fragment title to selected fragment
+        binding.fragmentsTv.text = title
     }
 }

@@ -1,4 +1,4 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +24,5 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener {
             onBackPressed()
         }
-
-
     }
 }

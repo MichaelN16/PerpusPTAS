@@ -10,42 +10,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="165dp"
-        android:layout_marginTop="40dp"
         android:background="@drawable/back002"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_toolbar02">
-        <!--Title-->
-        <TextView
-            android:id="@+id/titleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Akun"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/subtitleTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/titleTv"
-            android:text="abc@example.com"
-            android:textColor="@color/white"/>
-        <ImageButton
-            android:id="@+id/logoutBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="10dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_logout_white"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
-
 
     <View
         android:layout_width="match_parent"
@@ -88,5 +53,124 @@
         android:layout_centerHorizontal="true"
         android:textSize="12sp"
         android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/detailsLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/emailTv"
+        android:layout_marginTop="8dp">
+
+        <!--Account-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Akun"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/accountTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <!--Member Since-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Anggota"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/memberDateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10/10/2023"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <!--Favorite Books-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Buku Favorit"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/favoriteBookCountTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+        <!--Status Akun-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status Akun"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+            <TextView
+                android:id="@+id/accountStatusTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belum Verifikasi"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_button01"
+        android:text="Perbarui Data"
+        android:layout_marginBottom="20sp"/>
 
 </RelativeLayout>

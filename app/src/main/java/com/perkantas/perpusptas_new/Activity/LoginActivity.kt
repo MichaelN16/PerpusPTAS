@@ -1,21 +1,14 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Activity
 
 import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import com.perkantas.perpusptas_new.Activity.MainActivity
-import com.perkantas.perpusptas_new.Auth.LoginRequest
-import com.perkantas.perpusptas_new.Auth.LoginResponse
-import com.perkantas.perpusptas_new.Constants.BASE_URL
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
+import com.perkantas.perpusptas_new.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityLoginBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -82,10 +75,10 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setMessage("Mencoba Login...")
         progressDialog.show()
 
-        /*startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        progressDialog.dismiss()*/
+        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        progressDialog.dismiss()
 
-        apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
+        /*apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.e(TAG, "Login gagal karena ${t.message}")
@@ -98,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
                         if (loginResponse?.statusCode == true && loginResponse.dataLog?.authToken != null) {
                             // Login success
                             Log.d(TAG, "Login successful. AuthToken: ${loginResponse.dataLog.authToken}")
-                            sessionManager.saveAuthToken(loginResponse.dataLog.authToken)
+                            sessionManager.saveDataLog(loginResponse.dataLog)
                             progressDialog.dismiss()
                             Toast.makeText(this@LoginActivity, "Berhasil Masuk akun, selamat datang " + loginResponse.dataLog.name, Toast.LENGTH_LONG).show()
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
@@ -118,7 +111,7 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this@LoginActivity, "Gagal masuk akun. Code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
-            })
+            })*/
     }
 
 }

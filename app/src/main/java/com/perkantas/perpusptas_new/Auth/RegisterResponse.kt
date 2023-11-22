@@ -11,12 +11,14 @@ data class RegisterResponse(
 
     @SerializedName("data")
     var dataReg: DataReg
-)
+) {
+    data class DataReg (
+        @SerializedName("name")
+        var name: String,
 
-data class DataReg (
-    @SerializedName("name")
-    var name: String,
+        @SerializedName("token")
+        var authToken: String
+    )
+}
 
-    @SerializedName("token")
-    var authToken: String
-)
+

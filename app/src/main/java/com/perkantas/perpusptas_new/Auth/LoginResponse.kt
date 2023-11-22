@@ -11,12 +11,14 @@ data class LoginResponse(
 
     @SerializedName("data")
     var dataLog: DataLog
-)
+) {
+    data class DataLog(
+        @SerializedName("token")
+        var authToken: String,
 
-data class DataLog(
-    @SerializedName("token")
-    var authToken: String,
+        @SerializedName("name")
+        var name: String
+    )
+}
 
-    @SerializedName("name")
-    var name: String
-)
+

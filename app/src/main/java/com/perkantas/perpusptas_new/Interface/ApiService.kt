@@ -1,7 +1,7 @@
 package com.perkantas.perpusptas_new.Interface
 
 import com.perkantas.perpusptas_new.Constants
-import com.perkantas.perpusptas_new.Model.Book
+import com.perkantas.perpusptas_new.Model.ModelBook
 import com.perkantas.perpusptas_new.Auth.LoginRequest
 import com.perkantas.perpusptas_new.Auth.LoginResponse
 import com.perkantas.perpusptas_new.Auth.RegisterRequest
@@ -25,7 +25,7 @@ interface ApiService {
 
     //books
     @GET(Constants.BOOK_URL)
-    fun getAllBooks(): Call<List<Book>>
+    fun getAllBooks(): Call<List<ModelBook>>
 
     /*//get user profile
     @GET(Constants.PROFILE_URL)

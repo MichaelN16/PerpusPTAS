@@ -3,8 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_attach_white.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_down_gray.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_email_gray.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_favorite_filled_white.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_gender.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_gender_gray.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_location_gray.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_notif_white.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_person_gray.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/ic_person_white.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/shape_button01.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/shape_button02.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/shape_button03.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/shape_edittext01.xml" value="0.154" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/shape_rect01.xml" value="0.153" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/shape_toolbar01.xml" value="0.154" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/shape_toolbar02.xml" value="0.154" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/tab_background_selected.xml" value="0.127" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/tab_background_unselected.xml" value="0.154" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/drawable/tab_selector.xml" value="0.127" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_book_detail.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_book_view.xml" value="0.20416666666666666" />
@@ -12,22 +30,28 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_forgot_password.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_landing.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_main1.xml" value="0.25" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_profile.xml" value="0.1" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_profile_edit.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_profile.xml" value="0.33" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_profile_edit.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_splash.xml" value="0.25" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_account.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/dropdown_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_account.xml" value="0.22" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_akun.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_blank.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_book_view.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_drop.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_history.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_library.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_notification.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_notifications.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_notifikasi.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_perpustakaan.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_riwayat.xml" value="0.18" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/row_book_list.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/row_book_view.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/menu/botton_nav_menu.xml" value="0.22" />
