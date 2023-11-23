@@ -169,6 +169,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/birthTil"
+            app:prefixText="+62"
             app:hintEnabled="false">
 
             <EditText
@@ -178,6 +179,7 @@
                 android:background="@drawable/shape_edittext01"
                 android:drawableStart="@drawable/ic_phone_gray"
                 android:drawablePadding="10dp"
+
                 android:hint="Nomor Telepon"
                 android:inputType="phone"
                 android:padding="10dp"

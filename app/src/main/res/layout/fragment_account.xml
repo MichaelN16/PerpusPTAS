@@ -10,13 +10,12 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="165dp"
-        android:background="@drawable/back002"/>
+        android:background="@drawable/back02"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="180dp"
-        android:background="@drawable/shape_rect01"/>
+        android:layout_marginTop="180dp"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profileIv"
@@ -55,122 +54,147 @@
         android:textColor="@color/black"/>
 
     <LinearLayout
-        android:id="@+id/detailsLl"
+        android:id="@+id/infoLl"
+        android:background="@drawable/white_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@id/emailTv"
-        android:layout_marginTop="8dp">
-
-        <!--Account-->
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp">
+        <!--Address-->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Akun"
+                android:text="Alamat :"
+                android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:textSize="12sp"/>
             <TextView
-                android:id="@+id/accountTypeTv"
+                android:id="@+id/addressTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:layout_weight="1"
+                android:text="Alamat Rumah"
+                android:textAlignment="viewEnd"/>
         </LinearLayout>
 
-        <!--Member Since-->
+        <!--Birth Info-->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Anggota"
+                android:text="Tempat/Tgl Lahir :"
+                android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:textSize="12sp"/>
             <TextView
-                android:id="@+id/memberDateTv"
+                android:id="@+id/birthPlaceTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tempat"
+                android:textAlignment="viewEnd"/>
+            <TextView
+                android:id="@+id/birthDateTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10/10/2023"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:layout_marginStart="5dp"
+                android:text="dd/MM/yyyy"
+                android:textAlignment="viewEnd"/>
         </LinearLayout>
 
-        <!--Favorite Books-->
+        <!--Phone-->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Buku Favorit"
+                android:text="Nomor Telepon :"
+                android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:textSize="12sp"/>
             <TextView
-                android:id="@+id/favoriteBookCountTv"
-                android:layout_width="wrap_content"
+                android:id="@+id/phoneTv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="10"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:layout_weight="1"
+                android:text="1234567890"
+                android:textAlignment="viewEnd"/>
         </LinearLayout>
 
-        <!--Status Akun-->
+        <!--Component-->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Status Akun"
+                android:text="Komponen :"
+                android:layout_weight="1"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:textSize="12sp"/>
             <TextView
-                android:id="@+id/accountStatusTv"
-                android:layout_width="wrap_content"
+                android:id="@+id/componentTv"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Belum Verifikasi"
-                android:textColor="@color/black"
-                android:textSize="12sp"
-                android:textAlignment="center"/>
+                android:layout_weight="1"
+                android:text="Asal Komponen"
+                android:textAlignment="viewEnd"/>
         </LinearLayout>
 
+        <!--Component-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Password :"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="12sp"/>
+            <TextView
+                android:id="@+id/passwordTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ganti Password"
+                android:textAlignment="viewEnd"/>
+        </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/updateBtn"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/infoLl"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/shape_button01"
-        android:text="Perbarui Data"
+        android:text="Ubah Profil"
         android:layout_marginBottom="20sp"/>
 
 </RelativeLayout>

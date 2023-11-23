@@ -70,5 +70,4 @@ class LibraryFragment : Fragment(){
 
             return arr
         }
-
 }
