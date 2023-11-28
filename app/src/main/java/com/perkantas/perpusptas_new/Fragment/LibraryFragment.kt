@@ -1,6 +1,8 @@
 package com.perkantas.perpusptas_new.Fragment
 
+import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,15 +10,22 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.perkantas.perpusptas_new.Adapter.AdapterBook
+import com.perkantas.perpusptas_new.Interface.BookResponse
 import com.perkantas.perpusptas_new.Model.ModelBook
 import com.perkantas.perpusptas_new.R
+import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.databinding.FragmentLibraryBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LibraryFragment : Fragment(){
     private lateinit var binding: FragmentLibraryBinding
     private lateinit var adapter: AdapterBook
     private lateinit var rvBook: RecyclerView
     private lateinit var arrBook: ArrayList<ModelBook>
+    private lateinit var apiClient: ApiClient
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,18 +33,51 @@ class LibraryFragment : Fragment(){
     ): View {
         binding = FragmentLibraryBinding.inflate(inflater, container, false)
         val view = binding.root
+        apiClient = ApiClient()
         rvBook = binding.booksRv
 
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setTitle("Memuat data")
+        progressDialog.setCanceledOnTouchOutside(false)
+
+        //getBookList()
+        showBooks()
+
+        return view
+    }
+
+    private var listBook: ArrayList<ModelBook> = ArrayList()
+
+    private fun getBookList(){
+        progressDialog.show()
+
+        apiClient.getApiService(requireContext()).getBooks().enqueue(object : Callback<BookResponse>{
+            override fun onResponse(call: Call<BookResponse>, response: Response<BookResponse>) {
+                progressDialog.dismiss()
+
+                val bookResponse = response.body()!!
+
+                showBooks()
+
+            }
+
+            override fun onFailure(call: Call<BookResponse>, t: Throwable) {
+                progressDialog.dismiss()
+                Log.d("Library Response", "${t.message}")
+            }
+
+        })
+    }
+
+    private fun showBooks() {
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rvBook.layoutManager = layoutManager
 
         arrBook = createBookList()
-
+        //arrBook = listBook
         adapter = AdapterBook(arrBook)
         rvBook.adapter = adapter
-
-        return view
     }
 
     private fun createBookList(): ArrayList<ModelBook> {

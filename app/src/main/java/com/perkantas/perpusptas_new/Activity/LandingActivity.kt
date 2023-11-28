@@ -1,15 +1,11 @@
 package com.perkantas.perpusptas_new.Activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.perkantas.perpusptas_new.Model.PostsResponse
+import androidx.appcompat.app.AppCompatActivity
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
-import com.perkantas.perpusptas_new.SessionManager
+import com.perkantas.perpusptas_new.Auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityLandingBinding
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LandingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLandingBinding
@@ -36,19 +32,4 @@ class LandingActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchPosts(){
-
-        //pass the token parameter
-        apiClient.getApiService(this).fetchPosts()
-            .enqueue(object : Callback<PostsResponse>{
-                override fun onFailure(call: Call<PostsResponse>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<PostsResponse>, response: Response<PostsResponse>
-                ) {
-                    TODO("Not yet implemented")
-                }
-            })
-    }
 }

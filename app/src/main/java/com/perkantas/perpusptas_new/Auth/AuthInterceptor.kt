@@ -1,4 +1,4 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Auth
 
 import android.content.Context
 import okhttp3.Interceptor

@@ -2,13 +2,19 @@ package com.perkantas.perpusptas_new.Activity
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.perkantas.perpusptas_new.Interface.LoginRequest
+import com.perkantas.perpusptas_new.Interface.LoginResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
-import com.perkantas.perpusptas_new.SessionManager
+import com.perkantas.perpusptas_new.Auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityLoginBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -17,12 +23,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
-
-    val Any.TAG: String
-    get(){
-        val tag = javaClass.simpleName
-        return if (tag.length <=23) tag else tag.substring(0, 23)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,13 +75,13 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setMessage("Mencoba Login...")
         progressDialog.show()
 
-        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-        progressDialog.dismiss()
+        /*startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+        progressDialog.dismiss()*/
 
-        /*apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
+        apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Log.e(TAG, "Login gagal karena ${t.message}")
+                    Log.e("Response", "Login gagal karena ${t.message}")
                     progressDialog.dismiss()
                     Toast.makeText(this@LoginActivity,"Gagal masuk akun karena ${t.message} ", Toast.LENGTH_SHORT).show()
                 }
@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
                         val loginResponse = response.body()
                         if (loginResponse?.statusCode == true && loginResponse.dataLog?.authToken != null) {
                             // Login success
-                            Log.d(TAG, "Login successful. AuthToken: ${loginResponse.dataLog.authToken}")
+                            Log.d("Response", "Login successful. AuthToken: ${loginResponse.dataLog.authToken}")
                             sessionManager.saveDataLog(loginResponse.dataLog)
                             progressDialog.dismiss()
                             Toast.makeText(this@LoginActivity, "Berhasil Masuk akun, selamat datang " + loginResponse.dataLog.name, Toast.LENGTH_LONG).show()
@@ -98,20 +98,18 @@ class LoginActivity : AppCompatActivity() {
                             finish()
                         } else {
                             progressDialog.dismiss()
-                            Log.d(TAG, "Login failed. Response: ${response.body()}")
+                            Log.d("Response", "Login failed. Response: ${response.body()}")
                             Toast.makeText(this@LoginActivity, "Gagal masuk akun", Toast.LENGTH_LONG).show()
                         }
                     } else {
                         //response failure untuk salah password/koneksi error/dll
                         progressDialog.dismiss()
-                        Log.d(TAG, "Login failed. Response code: ${response.code()}")
-                        Log.d(TAG, "Response: ${response.raw().toString()}")
-                        Log.d(TAG, "Response body: ${response.body()}")
-                        Log.e(TAG, "Base Url : $BASE_URL")
+                        Log.d("Response", "Login failed. Response code: ${response.code()}")
+                        Log.d("Response", "Response: ${response.raw().toString()}")
                         Toast.makeText(this@LoginActivity, "Gagal masuk akun. Code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
-            })*/
+            })
     }
 
 }

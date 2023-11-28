@@ -50,7 +50,7 @@
             android:text="Deskripsi Buku"
             android:layout_toEndOf="@id/bookRl"
             android:layout_below="@id/titleTv"
-            android:maxLines="4"
+            android:maxLines="3"
             android:layout_marginTop="8dp"
             android:ellipsize="end"/>
 

@@ -1,0 +1,37 @@
+package com.perkantas.perpusptas_new.Retrofit
+
+import com.perkantas.perpusptas_new.Constants
+import com.perkantas.perpusptas_new.Interface.*
+import retrofit2.Call
+import retrofit2.http.*
+import java.util.*
+
+interface ApiService {
+    //login
+    @POST(Constants.LOGIN_URL)
+    fun login (@Body request: LoginRequest): Call<LoginResponse>
+
+    //register
+    @POST(Constants.REGISTER_URL)
+    fun register(@Body request: RegisterRequest): Call<RegisterResponse>
+
+    //load books list
+    @GET(Constants.BOOK_URL)
+    fun getBooks(): Call<BookResponse>
+
+    // get user profile
+    @GET(Constants.PROFILE_URL)
+    fun getUserProfile(@Header("Authorization") token: String): Call<MyProfileResponse>
+
+    //update user info
+    @POST(Constants.PROFILE_URL)
+    fun updateUserProfile(
+        @Field("name") name:String,
+        @Field("birth_place") birthPlace: String,
+        @Field("birth_date") birthDate: Date,
+        @Field("phone") phone:String,
+        @Field("address") address:String,
+        @Field("component") component:String
+    ): Call<MyProfileResponse>
+
+}

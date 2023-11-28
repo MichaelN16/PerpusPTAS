@@ -14,7 +14,7 @@ import com.perkantas.perpusptas_new.Fragment.NotificationFragment
 import com.perkantas.perpusptas_new.Fragment.LibraryFragment
 import com.perkantas.perpusptas_new.Fragment.HistoryFragment
 import com.perkantas.perpusptas_new.R
-import com.perkantas.perpusptas_new.SessionManager
+import com.perkantas.perpusptas_new.Auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

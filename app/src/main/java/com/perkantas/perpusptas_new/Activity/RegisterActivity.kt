@@ -7,10 +7,10 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import com.perkantas.perpusptas_new.Auth.RegisterRequest
-import com.perkantas.perpusptas_new.Auth.RegisterResponse
+import com.perkantas.perpusptas_new.Interface.RegisterRequest
+import com.perkantas.perpusptas_new.Interface.RegisterResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
-import com.perkantas.perpusptas_new.SessionManager
+import com.perkantas.perpusptas_new.Auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Callback

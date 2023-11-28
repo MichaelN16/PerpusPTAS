@@ -1,9 +1,8 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.perkantas.perpusptas_new.Activity.ProfileEditActivity
 import com.perkantas.perpusptas_new.databinding.ActivityBookDetailBinding
 
 class BookDetailActivity : AppCompatActivity() {

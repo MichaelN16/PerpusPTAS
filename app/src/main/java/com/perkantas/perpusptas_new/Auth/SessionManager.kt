@@ -1,8 +1,9 @@
-package com.perkantas.perpusptas_new
+package com.perkantas.perpusptas_new.Auth
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.perkantas.perpusptas_new.Auth.LoginResponse
+import com.perkantas.perpusptas_new.Interface.LoginResponse
+import com.perkantas.perpusptas_new.R
 
 class SessionManager (context: Context) {
     private var prefs: SharedPreferences = context.getSharedPreferences(context.getString(R.string.app_name), Context.MODE_PRIVATE)

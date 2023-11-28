@@ -19,7 +19,7 @@
             android:name=".Activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".BookDetailActivity"
+            android:name=".Activity.BookDetailActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.ForgotPasswordActivity"
@@ -29,12 +29,6 @@
             android:exported="false" />
         <activity
             android:name=".Activity.ProfileEditActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DashboardActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.LoginActivity"

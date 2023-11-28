@@ -1,44 +1,30 @@
-package com.perkantas.perpusptas_new.Model
+package com.perkantas.perpusptas_new.Interface
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
-data class User(
-    /*datanya id, email, nama*/
-
-    @SerializedName("id")
-    @Expose
-    var id: Int,
-
+data class MyProfileRequest(
     @SerializedName("name")
-    @Expose
     var name: String,
 
     @SerializedName("email")
-    @Expose
-    var email: String
-/*
+    var email: String,
+
     @SerializedName("birth_place")
-    @Expose
     var birthPlace: String,
 
     @SerializedName("birth_date")
-    @Expose
-    var birthDate: String,
+    var birthDate: Date,
 
     @SerializedName("phone")
-    @Expose
-    var phone: String,
+    var phone: Number,
 
     @SerializedName("address")
-    @Expose
     var address: String,
 
     @SerializedName("photo")
-    @Expose
     var photo: String,
 
     @SerializedName("component")
-    @Expose
-    var component: String*/
+    var component: String
 )
