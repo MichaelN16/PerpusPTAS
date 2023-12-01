@@ -1,18 +1,20 @@
 package com.perkantas.perpusptas_new.Fragment
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.perkantas.perpusptas_new.Activity.BookDetailActivity
+import com.perkantas.perpusptas_new.Activity.ForgotPasswordActivity
 import com.perkantas.perpusptas_new.Adapter.AdapterBook
-import com.perkantas.perpusptas_new.Interface.BookResponse
-import com.perkantas.perpusptas_new.Model.ModelBook
-import com.perkantas.perpusptas_new.R
+import com.perkantas.perpusptas_new.Model.BookResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.databinding.FragmentLibraryBinding
 import retrofit2.Call
@@ -23,7 +25,6 @@ class LibraryFragment : Fragment(){
     private lateinit var binding: FragmentLibraryBinding
     private lateinit var adapter: AdapterBook
     private lateinit var rvBook: RecyclerView
-    private lateinit var arrBook: ArrayList<ModelBook>
     private lateinit var apiClient: ApiClient
     private lateinit var progressDialog: ProgressDialog
 
@@ -40,32 +41,33 @@ class LibraryFragment : Fragment(){
         progressDialog.setTitle("Memuat data")
         progressDialog.setCanceledOnTouchOutside(false)
 
-        //getBookList()
-        showBooks()
+        getBookList()
 
         return view
     }
 
-    private var listBook: ArrayList<ModelBook> = ArrayList()
+    private var listBook:ArrayList<BookResponse.DataBook> = ArrayList()
 
     private fun getBookList(){
         progressDialog.show()
-
         apiClient.getApiService(requireContext()).getBooks().enqueue(object : Callback<BookResponse>{
             override fun onResponse(call: Call<BookResponse>, response: Response<BookResponse>) {
                 progressDialog.dismiss()
-
                 val bookResponse = response.body()!!
 
-                showBooks()
-
+                if (response.isSuccessful) {
+                    listBook = ArrayList(bookResponse.dataBook)
+                    showBooks()
+                } else {
+                    // Handle unsuccessful response
+                    Log.e("LibraryFragment", "BookResponse is null.")
+                }
             }
 
             override fun onFailure(call: Call<BookResponse>, t: Throwable) {
                 progressDialog.dismiss()
                 Log.d("Library Response", "${t.message}")
             }
-
         })
     }
 
@@ -74,13 +76,19 @@ class LibraryFragment : Fragment(){
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rvBook.layoutManager = layoutManager
 
-        arrBook = createBookList()
-        //arrBook = listBook
-        adapter = AdapterBook(arrBook)
+        Log.d("LibraryFragment", "Number of books: ${listBook.size}")
+
+        adapter = AdapterBook(listBook, object : AdapterBook.OnAdapterListener{
+            override fun onClick(data: ArrayList<BookResponse.DataBook>) {
+                startActivity(Intent(requireContext(), BookDetailActivity::class.java))
+            }
+
+        })
         rvBook.adapter = adapter
+        adapter.notifyDataSetChanged()
     }
 
-    private fun createBookList(): ArrayList<ModelBook> {
+    /*private fun createBookList(): ArrayList<ModelBook> {
             val arr = ArrayList<ModelBook>()
             val p1 = ModelBook()
             p1.bookTitle = "SERI PERJALANAN IMAN (PENGKHOTBAH)"
@@ -111,5 +119,5 @@ class LibraryFragment : Fragment(){
             arr.add(p3)
 
             return arr
-        }
+        }*/
 }

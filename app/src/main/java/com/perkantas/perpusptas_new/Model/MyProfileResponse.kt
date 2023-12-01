@@ -1,4 +1,4 @@
-package com.perkantas.perpusptas_new.Interface
+package com.perkantas.perpusptas_new.Model
 
 import com.google.gson.annotations.SerializedName
 import java.util.*

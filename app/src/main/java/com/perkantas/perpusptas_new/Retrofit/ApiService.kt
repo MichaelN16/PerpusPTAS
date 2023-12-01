@@ -1,7 +1,7 @@
 package com.perkantas.perpusptas_new.Retrofit
 
 import com.perkantas.perpusptas_new.Constants
-import com.perkantas.perpusptas_new.Interface.*
+import com.perkantas.perpusptas_new.Model.*
 import retrofit2.Call
 import retrofit2.http.*
 import java.util.*
@@ -26,10 +26,11 @@ interface ApiService {
     //update user info
     @POST(Constants.PROFILE_URL)
     fun updateUserProfile(
+        @Header("Authorization") token: String,
         @Field("name") name:String,
         @Field("birth_place") birthPlace: String,
         @Field("birth_date") birthDate: Date,
-        @Field("phone") phone:String,
+        @Field("phone") phone:Long,
         @Field("address") address:String,
         @Field("component") component:String
     ): Call<MyProfileResponse>

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.perkantas.perpusptas_new.Activity.ForgotPasswordActivity
 import com.perkantas.perpusptas_new.Activity.ProfileEditActivity
-import com.perkantas.perpusptas_new.Interface.MyProfileResponse
+import com.perkantas.perpusptas_new.Model.MyProfileResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.Auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.FragmentAccountBinding

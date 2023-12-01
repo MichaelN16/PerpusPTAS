@@ -2,7 +2,7 @@ package com.perkantas.perpusptas_new.Auth
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.perkantas.perpusptas_new.Interface.LoginResponse
+import com.perkantas.perpusptas_new.Model.LoginResponse
 import com.perkantas.perpusptas_new.R
 
 class SessionManager (context: Context) {

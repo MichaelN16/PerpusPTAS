@@ -7,8 +7,8 @@ import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.perkantas.perpusptas_new.Interface.LoginRequest
-import com.perkantas.perpusptas_new.Interface.LoginResponse
+import com.perkantas.perpusptas_new.Model.LoginRequest
+import com.perkantas.perpusptas_new.Model.LoginResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.Auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityLoginBinding
@@ -104,8 +104,8 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         //response failure untuk salah password/koneksi error/dll
                         progressDialog.dismiss()
-                        Log.d("Response", "Login failed. Response code: ${response.code()}")
-                        Log.d("Response", "Response: ${response.raw().toString()}")
+                        Log.d("Response :", "Login failed. Response code: ${response.code()}")
+                        Log.d("Response :", response.raw().toString())
                         Toast.makeText(this@LoginActivity, "Gagal masuk akun. Code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }

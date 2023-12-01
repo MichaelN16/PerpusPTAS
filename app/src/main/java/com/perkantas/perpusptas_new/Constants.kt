@@ -3,7 +3,7 @@ package com.perkantas.perpusptas_new
 object Constants {
 
     //endpoints
-    const val BASE_URL = "https://popular-jaybird-willingly.ngrok-free.app"
+    const val BASE_URL = "https://illegally-proud-tahr.ngrok-free.app"
     const val LOGIN_URL = "/api/login"
     const val BOOK_URL = "/api/books"
     const val REGISTER_URL = "/api/register"

@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.widget.Toast
-import com.perkantas.perpusptas_new.Interface.RegisterRequest
-import com.perkantas.perpusptas_new.Interface.RegisterResponse
+import com.perkantas.perpusptas_new.Model.RegisterRequest
+import com.perkantas.perpusptas_new.Model.RegisterResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.Auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.ActivityRegisterBinding
@@ -23,12 +23,6 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
-
-    val Any.TAG: String
-        get(){
-            val tag = javaClass.simpleName
-            return if (tag.length <=23) tag else tag.substring(0, 23)
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,9 +101,9 @@ class RegisterActivity : AppCompatActivity() {
                     }
                     else{
                         //response untuk email sudah dipakai/password kurang sesuai aturan/dll
-                        Log.d(TAG, "Login failed. Response code: ${response.code()}")
-                        Log.d(TAG, "Response: ${response.raw().toString()}")
-                        Log.d(TAG, "Response body: ${response.body()}")
+                        Log.d("Response :", "Login failed. Response code: ${response.code()}")
+                        Log.d("Response :", "Response: ${response.raw().toString()}")
+                        Log.d("Response :", "Response body: ${response.body()}")
                         progressDialog.dismiss()
                         Toast.makeText(this@RegisterActivity,"Gagal mendaftarkan akun", Toast.LENGTH_SHORT).show()
                     }

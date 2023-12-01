@@ -1,4 +1,4 @@
-package com.perkantas.perpusptas_new.Interface
+package com.perkantas.perpusptas_new.Model
 
 import com.google.gson.annotations.SerializedName
 
@@ -40,8 +40,8 @@ data class BookResponse(
         @SerializedName("book_desc")
         var bookDesc: String,
 
-        @SerializedName("barcode")
-        var barcode: String
+        //progress bar to load book cover
+        var isLoading: Boolean = false
     )
 }
 
