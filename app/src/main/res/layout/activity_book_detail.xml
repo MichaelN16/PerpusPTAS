@@ -55,9 +55,9 @@
                     android:layout_height="150dp"
                     android:layout_marginEnd="5dp"
                     android:background="@color/gray02">
-                    <!--Pdf view-->
+                    <!--Cover view-->
                     <ImageView
-                        android:id="@+id/coverBook"
+                        android:id="@+id/coverBookIv"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"/>
                     <!--Progress bar-->
@@ -160,26 +160,6 @@
                             android:layout_marginEnd="5dp"/>
                     </TableRow>
 
-                    <!--Number of pages row-->
-                    <TableRow
-                        android:layout_marginTop="5dp">
-                        <TextView
-                            android:id="@+id/pagesLabelTv"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Jumlah Halaman"
-                            android:layout_marginEnd="5dp"/>
-                        <TextView
-                            android:id="@+id/pagesTv"
-                            android:layout_weight="1"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="N/A"
-                            android:layout_marginEnd="5dp"/>
-                    </TableRow>
-
                     <!--Stock row-->
                     <TableRow
                         android:layout_marginTop="5dp">
@@ -226,17 +206,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="10sp"
-            android:text="Ajukan Peminjaman"
+            android:text="Pinjam Buku"
             android:layout_weight="1"
             android:drawableTop="@drawable/ic_book_white"/>
-        <!--Add/Remove Favorite Button-->
-        <Button
-            android:id="@+id/favoriteBtn"
-            android:layout_width="0dp"
-            android:drawableTop="@drawable/ic_favorite_border_white"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:text="Tandai Favorit"
-            android:layout_weight="1"/>
     </LinearLayout>
 </RelativeLayout>

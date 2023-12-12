@@ -24,7 +24,8 @@ class ProfileEditActivity : AppCompatActivity() {
 
         //handle update profile
         binding.updateBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            updateProfile()
+            finish()
         }
 
     }
@@ -42,6 +43,6 @@ class ProfileEditActivity : AppCompatActivity() {
     }
 
     private fun updateProfile() {
-
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

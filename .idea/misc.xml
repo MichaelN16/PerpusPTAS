@@ -39,14 +39,17 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_main1.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_not_logged_in.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_profile_edit.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_register.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_splash.xml" value="0.25" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/activity_verification.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/dropdown_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_account.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_akun.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_blank.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_book.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_book_view.xml" value="0.25" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/User/AndroidStudioProjects/PerpusPTAS_New/app/src/main/res/layout/fragment_drop.xml" value="0.20416666666666666" />

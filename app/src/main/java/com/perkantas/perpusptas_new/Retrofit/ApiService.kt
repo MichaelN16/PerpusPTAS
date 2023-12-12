@@ -19,6 +19,14 @@ interface ApiService {
     @GET(Constants.BOOK_URL)
     fun getBooks(): Call<BookResponse>
 
+    //load books list (guest)
+    @GET(Constants.INDEX_URL)
+    fun getBookIndex(): Call<BookResponse>
+
+    //get categories
+    @GET(Constants.CATEGORIES_URL)
+    fun getCategories():Call<CategoryResponse>
+
     // get user profile
     @GET(Constants.PROFILE_URL)
     fun getUserProfile(@Header("Authorization") token: String): Call<MyProfileResponse>

@@ -25,7 +25,7 @@ data class BookResponse(
         @SerializedName("author")
         var author: String,
 
-        @SerializedName("category")
+        @SerializedName("category") //change to id
         var category: String,
 
         @SerializedName("publisher")

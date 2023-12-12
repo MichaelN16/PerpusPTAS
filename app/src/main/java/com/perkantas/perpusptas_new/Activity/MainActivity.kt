@@ -54,17 +54,37 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+
+        //back button
+        binding.backBtn.setOnClickListener {
+            startActivity(Intent(this, LandingActivity::class.java))
+            finish()
+        }
+
+        binding.loginBtn.setOnClickListener {
+            startActivity(Intent(this, VerificationActivity::class.java))
+            finish()
+        }
     }
 
     private fun checkUser() {
         if(sessionManager.isLoggedIn()){
             val data = sessionManager.fetchDataLog()
+            //set text to user name
             binding.usernameTv.text = data.name
 
+            //show logout button, hide login btn
             binding.logoutBtn.visibility = View.VISIBLE
+            binding.loginBtn.visibility = View.GONE
+            binding.backBtn.visibility = View.GONE
         } else{
+            //set text to "not logged in"
             binding.usernameTv.text = "Belum masuk akun"
+
+            //hide logout btn, show login btn
             binding.logoutBtn.visibility = View.GONE
+            binding.loginBtn.visibility = View.VISIBLE
+            binding.backBtn.visibility = View.VISIBLE
         }
     }
 
