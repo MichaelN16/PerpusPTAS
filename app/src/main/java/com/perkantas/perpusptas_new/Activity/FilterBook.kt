@@ -23,7 +23,7 @@ class FilterBook : Filter {
         if (constraint != null && constraint.isNotEmpty()){
             //change to upper case or lower case to avoid sensitive case
             constraint = constraint.toString().lowercase()
-            var filteredModels = ArrayList<BookResponse.DataBook>()
+            val filteredModels = ArrayList<BookResponse.DataBook>()
             for (i in filterList.indices){
                 //validate if match
                 if (filterList[i].bookTitle.lowercase().contains(constraint)){

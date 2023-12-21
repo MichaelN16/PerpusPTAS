@@ -20,6 +20,14 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray01"/>
 
+    <!-- ProgressBar for loading indicator -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
     <!--RecycleView: Load Books-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/booksRv"

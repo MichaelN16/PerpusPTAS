@@ -1,6 +1,7 @@
 package com.perkantas.perpusptas_new.Model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class BookResponse(
     @SerializedName("success")
@@ -25,7 +26,7 @@ data class BookResponse(
         @SerializedName("author")
         var author: String,
 
-        @SerializedName("category") //change to id
+        @SerializedName("category")
         var category: String,
 
         @SerializedName("publisher")
@@ -42,7 +43,7 @@ data class BookResponse(
 
         //progress bar to load book cover
         var isLoading: Boolean = false
-    )
+    ) : Serializable
 }
 
 

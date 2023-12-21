@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -33,6 +34,7 @@ android {
     buildFeatures{
         viewBinding true
     }
+
 }
 
 dependencies {
@@ -65,8 +67,4 @@ dependencies {
     //recycle view and card view
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-
-    //picasso
-    implementation 'com.squareup.picasso:picasso:2.8'
-
 }

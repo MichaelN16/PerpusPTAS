@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoryResponse(
     @SerializedName("success")
-    var statusCode: Boolean,
+    val statusCode: Boolean,
 
     @SerializedName("message")
-    var messages: String,
+    val messages: String,
 
     @SerializedName("data")
-    var dataCat:DataCat
+    val dataCat: ArrayList<DataCat>
 ){
     data class DataCat(
         @SerializedName("id")

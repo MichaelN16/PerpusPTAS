@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
         progressDialog.setTitle("Mohon Tunggu")
         progressDialog.setCanceledOnTouchOutside(false)
 
+        //no account text button
         binding.noAccountTv.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
@@ -49,8 +50,15 @@ class LoginActivity : AppCompatActivity() {
             * 3. Login*/
             validateData()
         }
+
+        //forgot password button
         binding.forgotTv.setOnClickListener {
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
+        }
+
+        //back button
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
         }
     }
     private var email = ""

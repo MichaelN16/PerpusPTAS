@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.bumptech.glide.Glide
 import com.perkantas.perpusptas_new.Adapter.AdapterBook
 import com.perkantas.perpusptas_new.Constants
@@ -33,7 +34,6 @@ class BookDetailActivity : AppCompatActivity() {
         val bookData: BookResponse.DataBook? =
             intent.getSerializableExtra("dataBook") as BookResponse.DataBook?
 
-
         if (bookData != null) {
             // Set the book details to the views
             binding.titleTv.text = bookData.bookTitle
@@ -49,6 +49,13 @@ class BookDetailActivity : AppCompatActivity() {
                 .load(Constants.BASE_URL + "/" + bookData.bookCover)
                 .error(R.drawable.ic_error_gray) // Placeholder for error case
                 .into(binding.coverBookIv)
+
+            // Set the visibility of the ProgressBar based on the loading status
+            if (bookData.isLoading) {
+                binding.progressBar.visibility = View.VISIBLE
+            } else {
+                binding.progressBar.visibility = View.GONE
+            }
 
         } else {
             // Handle the case where no book data is available

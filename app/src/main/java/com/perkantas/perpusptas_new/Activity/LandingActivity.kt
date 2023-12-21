@@ -28,6 +28,7 @@ class LandingActivity : AppCompatActivity() {
 
         //handle click skip button
         binding.skipBtn.setOnClickListener {
+            sessionManager.deleteAuthToken()
             startActivity(Intent(this, MainActivity::class.java))
         }
     }

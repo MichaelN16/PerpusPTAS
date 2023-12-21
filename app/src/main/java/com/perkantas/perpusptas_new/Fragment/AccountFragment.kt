@@ -43,6 +43,16 @@ class AccountFragment : Fragment() {
 
         checkUser()
 
+        binding.updateBtn.setOnClickListener {
+            // Pass the profile data to ProfileEditActivity
+            val intent = Intent(requireContext(), ProfileEditActivity::class.java)
+            intent.putExtra("NAME", binding.nameTv.text.toString())
+            intent.putExtra("ADDRESS", binding.addressTv.text.toString())
+            intent.putExtra("BIRTH_PLACE", binding.birthPlaceTv.text.toString())
+            intent.putExtra("COMPONENT", binding.componentTv.text.toString())
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
