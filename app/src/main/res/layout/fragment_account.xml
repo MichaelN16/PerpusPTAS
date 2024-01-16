@@ -195,7 +195,6 @@
         android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/shape_button01"
-        android:text="Ubah Profil"
-        android:layout_marginBottom="20sp"/>
+        android:text="Ubah Profil"/>
 
 </RelativeLayout>

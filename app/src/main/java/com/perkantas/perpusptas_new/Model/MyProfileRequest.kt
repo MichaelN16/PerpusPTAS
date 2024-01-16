@@ -11,7 +11,7 @@ data class MyProfileRequest(
     var birthPlace: String,
 
     @SerializedName("birth_date")
-    var birthDate: Date,
+    var birthDate: String,
 
     @SerializedName("phone")
     var phone: Long,
@@ -22,4 +22,3 @@ data class MyProfileRequest(
     @SerializedName("component")
     var component: String
 )
-

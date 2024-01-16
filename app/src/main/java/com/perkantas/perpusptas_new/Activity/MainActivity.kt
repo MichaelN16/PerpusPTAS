@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         sessionManager = SessionManager(this)
+
         //fungsi untuk melihat user login/tidak, dan untuk menampilkan nama
         checkUser()
 
@@ -63,7 +65,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.loginBtn.setOnClickListener {
             startActivity(Intent(this, VerificationActivity::class.java))
-            finish()
         }
     }
 
@@ -119,12 +120,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun callFragment(index: Int, fragment: Fragment, title: String){
-        menuItem = menu.getItem(index)
-        menuItem.isChecked = true
-        fm.beginTransaction().hide(active).show(fragment).commit()
-        active = fragment
+        if (sessionManager.isLoggedIn() || index == 0) {
+            // Allow access to the fragment if the user is logged in or if it's the LibraryFragment (index 0)
+            menuItem = menu.getItem(index)
+            menuItem.isChecked = true
+            fm.beginTransaction().hide(active).show(fragment).commit()
+            active = fragment
 
-        //set fragment title to selected fragment
-        binding.fragmentsTv.text = title
+            // Set fragment title to selected fragment
+            binding.fragmentsTv.text = title
+        } else {
+            // Handle the case where the user is not logged in and attempting to access other fragments
+            showToast("Silahkan masuk akun untuk menggunakan fitur ini")
+            // Redirect to the login screen
+            startActivity(Intent(this, VerificationActivity::class.java))
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

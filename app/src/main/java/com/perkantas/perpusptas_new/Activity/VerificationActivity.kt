@@ -22,5 +22,9 @@ class VerificationActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
+
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
     }
 }

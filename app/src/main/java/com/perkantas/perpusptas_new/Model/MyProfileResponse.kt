@@ -5,7 +5,7 @@ import java.util.*
 
 data class MyProfileResponse(
     @SerializedName("success")
-    var statusCode: Boolean,
+    var success: Boolean,
 
     @SerializedName("message")
     var message: String,

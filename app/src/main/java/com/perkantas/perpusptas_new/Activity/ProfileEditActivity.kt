@@ -3,6 +3,8 @@ package com.perkantas.perpusptas_new.Activity
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Toast
@@ -15,6 +17,8 @@ import com.perkantas.perpusptas_new.databinding.ActivityProfileEditBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
@@ -31,7 +35,7 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         apiClient = ApiClient()
 
         loadArrayComponent()
-        /*loadArrayGender()*/
+
         //handle click, go back
         binding.backBtn.setOnClickListener {
             onBackPressed()
@@ -39,11 +43,10 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
 
         //handle update profile
         binding.updateBtn.setOnClickListener {
-            //updateProfile()
-            finish()
+            validateData()
         }
 
-        binding.birthEt.setOnClickListener {
+        binding.birthDatePickerBtn.setOnClickListener {
             showDatePickerDialog()
         }
 
@@ -72,27 +75,16 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
             { _, selectedYear, selectedMonth, selectedDay ->
                 val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
                 binding.birthEt.setText(selectedDate)
-            },
-            year,
-            month,
-            day
+            }, year, month, day
         )
-
         datePickerDialog.show()
     }
 
     // Implement onDateSet method
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
-        // Display the selected date in the birthEt EditText
-        val selectedDate = "$dayOfMonth/${month + 1}/$year"
-        binding.birthEt.setText(selectedDate)
+        val calendar = Calendar.getInstance()
+        calendar.set(year, month, dayOfMonth)
     }
-
-    /*private fun loadArrayGender() {
-        val gender = resources.getStringArray(R.array.gender)
-        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, gender)
-        binding.genderAc.setAdapter(arrayAdapter)
-    }*/
 
     private fun loadArrayComponent() {
         val komponen = resources.getStringArray(R.array.komponen)
@@ -100,35 +92,93 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         binding.componentAc.setAdapter(arrayAdapter)
     }
 
-    /*private fun updateProfile() {
-        //Retrieve the entered data
-        val name = binding.nameEt.text.toString().trim()
-        val address = binding.addressEt.text.toString().trim()
-        val birthPlace = binding.birthPlaceEt.text.toString().trim()
-        val birthDate = binding.birthEt.text.toString().trim()
-        val phoneNumber = binding.numberEt.text.toString().trim()
-        val component = binding.componentAc.text.toString().trim()
+    private var name = ""
+    private var address = ""
+    private var birthPlace = ""
+    private lateinit var birthDate : Date
+    private var phoneNumber : Long = 0
+    private var component = ""
 
-        val updateProfileRequest = MyProfileRequest(name, birthPlace, birthDate, phoneNumber, address, component)
+    private fun validateData() {
+        //Input, gather all user information data
+        name = binding.nameEt.text.toString().trim()
+        address = binding.addressEt.text.toString().trim()
+        birthPlace = binding.birthPlaceEt.text.toString().trim()
+        component = binding.componentAc.text.toString().trim()
+        phoneNumber = binding.numberEt.text.toString().trim().toLong()
+        val phoneText = binding.numberEt.text.toString().trim()
 
-        apiClient.getApiService(this).updateUserProfile(updateProfileRequest)
-            .enqueue(object : Callback<MyProfileResponse> {
-                override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
-                    Toast.makeText(this@ProfileEditActivity,"Gagal mendaftarkan karena ${t.message} ", Toast.LENGTH_SHORT).show()
-                }
+        ///Validate Data
+        if (name.isEmpty()) {
+            Toast.makeText(this, "Masukkan nama Anda", Toast.LENGTH_SHORT).show()
+        } else if (address.isEmpty()) {
+            Toast.makeText(this, "Masukkan alamat Anda", Toast.LENGTH_SHORT).show()
+        } else if (birthPlace.isEmpty()) {
+            Toast.makeText(this, "Masukkan tempat lahir Anda", Toast.LENGTH_SHORT).show()
+        } else if (component.isEmpty()) {
+            Toast.makeText(this, "Pilih komponen", Toast.LENGTH_SHORT).show()
+        } else if (phoneText.isEmpty()) {
+            Toast.makeText(this, "Masukkan nomor telepon", Toast.LENGTH_SHORT).show()
+        } else {
+            try {
+                phoneNumber = phoneText.toLong()
+                updateProfile()
+            } catch (e: NumberFormatException) {
+                Toast.makeText(this, "Format nomor telepon tidak valid", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
-                override fun onResponse(call: Call<MyProfileResponse>, response: Response<MyProfileResponse>) {
-                    val updateResponse = response.body()
+    private fun updateProfile() {
+        // Retrieve the entered data
+        name = binding.nameEt.text.toString().trim()
+        address = binding.addressEt.text.toString().trim()
+        birthPlace = binding.birthPlaceEt.text.toString().trim()
+        component = binding.componentAc.text.toString().trim()
 
-                    if (updateResponse?.statusCode==true){
+        // Birth date validator
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+        try {
+            birthDate = dateFormat.parse(binding.birthEt.text.toString().trim()) as Date
 
-                        Toast.makeText(this@ProfileEditActivity, "Berhasil membuat akun, silahkan Login", Toast.LENGTH_LONG).show()
-                        finish()
+            // Convert the date to 'yyyy-MM-dd' format for Laravel
+            val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val formattedDate = outputFormat.format(birthDate)
+
+            // Phone number validator
+            phoneNumber = binding.numberEt.text.toString().trim().toLong()
+
+            // Create the MyProfileRequest object
+            val updateRequest = MyProfileRequest(name, birthPlace, formattedDate, phoneNumber, address, component)
+
+            // Retrieve the authentication token
+            val token = "Bearer ${sessionManager.fetchAuthToken()}"
+            Log.d("Response : ", sessionManager.fetchAuthToken()!!)
+
+            // Check if the token is not null before making the API call
+            apiClient.getApiService(this).updateUserProfile(token, updateRequest)
+                .enqueue(object : Callback<MyProfileResponse> {
+                    override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
+                        Toast.makeText(this@ProfileEditActivity, "Gagal memperbarui profil karena ${t.message}", Toast.LENGTH_SHORT).show()
                     }
-                    else{
-                        Toast.makeText(this@ProfileEditActivity,"Gagal memperbarui profil", Toast.LENGTH_SHORT).show()
+
+                    override fun onResponse(call: Call<MyProfileResponse>, response: Response<MyProfileResponse>) {
+                        val updateResponse = response.body()
+
+                        if (updateResponse?.success == true) {
+                            Toast.makeText(this@ProfileEditActivity, "Berhasil memperbarui profil!", Toast.LENGTH_LONG).show()
+                            finish()
+                        } else {
+                            Toast.makeText(this@ProfileEditActivity, "Gagal memperbarui profil ", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
-            })
-    }*/
+                })
+        } catch (e: ParseException) {
+            // Handle the parsing exception, e.g., show an error message
+            Toast.makeText(this@ProfileEditActivity, "Invalid date format", Toast.LENGTH_SHORT).show()
+        } catch (e: NumberFormatException) {
+            // Handle the conversion exception, e.g., show an error message
+            Toast.makeText(this@ProfileEditActivity, "Invalid phone number", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

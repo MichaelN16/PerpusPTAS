@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.perkantas.perpusptas_new.Activity.ForgotPasswordActivity
 import com.perkantas.perpusptas_new.Activity.ProfileEditActivity
+import com.perkantas.perpusptas_new.Activity.VerificationActivity
 import com.perkantas.perpusptas_new.Model.MyProfileResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.Auth.SessionManager
@@ -33,6 +34,9 @@ class AccountFragment : Fragment() {
         apiClient = ApiClient()
         sessionManager = SessionManager(requireContext())
 
+        //fetch user data from API
+        fetchProfile()
+
         binding.updateBtn.setOnClickListener {
             startActivity(Intent(requireContext(), ProfileEditActivity::class.java))
         }
@@ -41,9 +45,7 @@ class AccountFragment : Fragment() {
             startActivity(Intent(requireContext(), ForgotPasswordActivity::class.java))
         }
 
-        checkUser()
-
-        binding.updateBtn.setOnClickListener {
+        binding.    updateBtn.setOnClickListener {
             // Pass the profile data to ProfileEditActivity
             val intent = Intent(requireContext(), ProfileEditActivity::class.java)
             intent.putExtra("NAME", binding.nameTv.text.toString())
@@ -53,15 +55,8 @@ class AccountFragment : Fragment() {
             startActivity(intent)
         }
 
-        return binding.root
-    }
 
-    private fun checkUser() {
-        if(sessionManager.isLoggedIn()){
-            fetchProfile()
-        } else {
-            Log.d("Response :", "Pindah ke menu login")
-        }
+        return binding.root
     }
 
     private fun fetchProfile() {
@@ -70,20 +65,27 @@ class AccountFragment : Fragment() {
             .enqueue(object : Callback<MyProfileResponse> {
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
                     // Error fetching posts
-                    Toast.makeText(requireContext(), "Gagal mengambil data karena ${t.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Gagal mengambil data karena ${t.message}", Toast.LENGTH_LONG).show()
+                    Log.e("Message", "${t.message}")
                 }
 
                 override fun onResponse(call: Call<MyProfileResponse>, response: Response<MyProfileResponse>) {
-                    // Handle function to display posts
-                    val profile = response.body()!!.dataProf
-                    binding.nameTv.text = profile.name
-                    binding.emailTv.text = profile.email
-                    binding.addressTv.text = profile.address
-                    binding.birthPlaceTv.text = profile.birthPlace
-                    binding.componentTv.text = profile.component
-
+                    // Handle function to display profile
+                    if (response.isSuccessful) {
+                        val profile = response.body()?.dataProf
+                        if (profile != null) {
+                            binding.nameTv.text = profile.name
+                            binding.emailTv.text = profile.email
+                            binding.addressTv.text = profile.address
+                            binding.birthPlaceTv.text = profile.birthPlace
+                            binding.componentTv.text = profile.component
+                        } else {
+                            Log.e("AccountFragment", "Profile response body is null")
+                        }
+                    } else {
+                        Log.e("AccountFragment", "Profile response is not successful. Code: ${response.code()}")
+                    }
                 }
             })
     }
-
 }

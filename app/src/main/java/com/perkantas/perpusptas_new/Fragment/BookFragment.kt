@@ -68,14 +68,7 @@ class BookFragment : Fragment() {
         val progressBar = binding.progressBar
         progressBar.visibility = View.VISIBLE // Show ProgressBar initially
 
-        // Initialize other UI components or variables if needed
-        if(category == "Semua"){
-            //load all books
-            loadAllBook()
-        } else {
-            //load selected category books
-            loadCategorizedBook()
-        }
+        loadBooks()
 
         // Search functionality
         binding.searchEt.addTextChangedListener(object : TextWatcher {
@@ -97,6 +90,16 @@ class BookFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    private fun loadBooks() {
+        if(category == "Semua"){
+            //load all books
+            loadAllBook()
+        } else {
+            //load selected category books
+            loadCategorizedBook()
+        }
     }
 
     private var listBook = ArrayList<BookResponse.DataBook>()
@@ -151,20 +154,38 @@ class BookFragment : Fragment() {
     }
 
     private fun showBooks() {
+        // Log the selected category for debugging
+        Log.d("BookFragment", "Selected Category: $category")
+
         // Initialize RecyclerView and Adapter
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rvBook.layoutManager = layoutManager
 
-        adapterBook = AdapterBook(listBook, listBook, object : AdapterBook.OnAdapterListener {
+        val filteredBooks: List<BookResponse.DataBook> = if (category == "Semua") {
+            // If the category is "Semua," show all books without filtering
+            Log.d("BookFragment", "Showing all books")
+            listBook
+        } else {
+            // If it's another category, filter the books based on the selected category
+            Log.d("BookFragment", "Filtering books for category: $category")
+            listBook.filter { it.category == category }
+        }
+
+        // Log the number of books after filtering
+        Log.d("BookFragment", "Number of books after filtering: ${filteredBooks.size}")
+
+        adapterBook = AdapterBook(filteredBooks as ArrayList<BookResponse.DataBook>,
+            filteredBooks, object : AdapterBook.OnAdapterListener {
+            // Implement onClick
             override fun onClick(data: BookResponse.DataBook) {
-                if (sessionManager.isLoggedIn()){
+                if (sessionManager.isLoggedIn()) {
                     // Handle the click event here
                     val intent = Intent(requireContext(), BookDetailActivity::class.java)
                     intent.putExtra("dataBook", data)
                     startActivity(intent)
-                } else{
-                    //go to verification class
+                } else {
+                    // Go to verification class
                     Log.d("AdapterBook", "User is not logged in")
                     Toast.makeText(requireContext(), "User is not logged in", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(requireContext(), VerificationActivity::class.java))
@@ -174,4 +195,5 @@ class BookFragment : Fragment() {
 
         rvBook.adapter = adapterBook
     }
+
 }

@@ -24,8 +24,6 @@ class LibraryFragment : Fragment() {
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
 
-    private val categoryList: ArrayList<CategoryResponse.DataCat> = ArrayList()
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,10 +47,14 @@ class LibraryFragment : Fragment() {
             override fun onResponse(call: Call<CategoryResponse>, response: Response<CategoryResponse>) {
                 if (response.isSuccessful){
                     val loadedCategoryList = ArrayList(response.body()?.dataCat ?: emptyList())
+
+                    // Add "Semua" category to the list
+                    val allCategory = CategoryResponse.DataCat(0, "Semua")
+                    loadedCategoryList.add(0, allCategory)
+
                     setUpViewPager(loadedCategoryList)
                     }
                 }
-
 
             override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
 
@@ -69,6 +71,5 @@ class LibraryFragment : Fragment() {
             // Customize tab labels based on your category data
             tab.text = categoryList[position].category
         }.attach()
-
     }
 }

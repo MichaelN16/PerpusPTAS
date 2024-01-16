@@ -77,28 +77,6 @@
                 android:textColorHint="@color/gray01"
                 android:hint="Nama"/>
         </com.google.android.material.textfield.TextInputLayout>
-<!--
-        &lt;!&ndash;Input Gender&ndash;&gt;
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/genderTil"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_below="@id/nameTil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintEnabled="false">
-            <AutoCompleteTextView
-                android:id="@+id/genderAc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_edittext01"
-                android:drawableStart="@drawable/ic_gender_gray"
-                android:drawablePadding="10dp"
-                android:padding="10dp"
-                android:hint="Jenis Kelamin"
-                android:inputType="none"
-                android:textColor="@color/black"
-                android:textColorHint="@color/gray01"/>
-        </com.google.android.material.textfield.TextInputLayout>-->
 
         <!--Input Address-->
         <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_edittext01"
-                android:drawableStart="@drawable/ic_location_gray"
+                android:drawableStart="@drawable/ic_city_gray"
                 android:drawablePadding="10dp"
                 android:inputType="textPersonName|textCapWords"
                 android:textColor="@color/black"
@@ -143,15 +121,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <!--Input Date of Birth-->
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:id="@+id/birthTil"
+            android:layout_below="@id/birthPlaceTil"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/birthPlaceTil"
-            app:hintEnabled="false">
+            android:orientation="horizontal">
+            <!-- EditText for Date -->
             <EditText
                 android:id="@+id/birthEt"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_edittext01"
                 android:drawableStart="@drawable/ic_calendar_gray"
@@ -161,7 +141,13 @@
                 android:padding="10dp"
                 android:textColorHint="@color/gray01"
                 android:hint="Tanggal Lahir"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            <!-- Button for DatePicker -->
+            <Button
+                android:id="@+id/birthDatePickerBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Pilih"/>
+        </LinearLayout>
 
         <!--Input Phone Number-->
         <com.google.android.material.textfield.TextInputLayout
@@ -179,11 +165,11 @@
                 android:background="@drawable/shape_edittext01"
                 android:drawableStart="@drawable/ic_phone_gray"
                 android:drawablePadding="10dp"
-
                 android:hint="Nomor Telepon"
                 android:inputType="phone"
                 android:padding="10dp"
                 android:textColor="@color/black"
+                app:expandedHintEnabled="false"
                 android:textColorHint="@color/gray01" />
         </com.google.android.material.textfield.TextInputLayout>
 
