@@ -10,10 +10,5 @@ data class ProfileCheckResponse(
     val messages: String,
 
     @SerializedName("data")
-    val check: Check
-) {
-    data class Check(
-        @SerializedName("boolean")
-        val status: Boolean
-    )
-}
+    val status: Boolean
+)

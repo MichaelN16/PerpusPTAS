@@ -155,7 +155,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/birthTil"
-            app:prefixText="+62"
             app:hintEnabled="false">
 
             <EditText
@@ -169,7 +168,6 @@
                 android:inputType="phone"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                app:expandedHintEnabled="false"
                 android:textColorHint="@color/gray01" />
         </com.google.android.material.textfield.TextInputLayout>
 

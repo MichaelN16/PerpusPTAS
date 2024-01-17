@@ -10,10 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.perkantas.perpusptas_new.Activity.ForgotPasswordActivity
 import com.perkantas.perpusptas_new.Activity.ProfileEditActivity
-import com.perkantas.perpusptas_new.Activity.VerificationActivity
 import com.perkantas.perpusptas_new.Model.MyProfileResponse
 import com.perkantas.perpusptas_new.Retrofit.ApiClient
 import com.perkantas.perpusptas_new.Auth.SessionManager
+import com.perkantas.perpusptas_new.Util.dateFormatConverter
 import com.perkantas.perpusptas_new.databinding.FragmentAccountBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,17 +45,17 @@ class AccountFragment : Fragment() {
             startActivity(Intent(requireContext(), ForgotPasswordActivity::class.java))
         }
 
-        binding.    updateBtn.setOnClickListener {
+        binding.updateBtn.setOnClickListener {
             // Pass the profile data to ProfileEditActivity
             val intent = Intent(requireContext(), ProfileEditActivity::class.java)
             intent.putExtra("NAME", binding.nameTv.text.toString())
             intent.putExtra("ADDRESS", binding.addressTv.text.toString())
             intent.putExtra("BIRTH_PLACE", binding.birthPlaceTv.text.toString())
             intent.putExtra("COMPONENT", binding.componentTv.text.toString())
+            intent.putExtra("PHONE", binding.phoneTv.text.toString())
+            intent.putExtra("DATE", binding.birthDateTv.text.toString())
             startActivity(intent)
         }
-
-
         return binding.root
     }
 
@@ -74,11 +74,15 @@ class AccountFragment : Fragment() {
                     if (response.isSuccessful) {
                         val profile = response.body()?.dataProf
                         if (profile != null) {
+                            //convert date
+                            val formattedDate = dateFormatConverter(profile.birthDate,"dd/MM/yyyy")
                             binding.nameTv.text = profile.name
                             binding.emailTv.text = profile.email
                             binding.addressTv.text = profile.address
                             binding.birthPlaceTv.text = profile.birthPlace
                             binding.componentTv.text = profile.component
+                            binding.birthDateTv.text = formattedDate
+                            binding.phoneTv.text = profile.phone.toString()
                         } else {
                             Log.e("AccountFragment", "Profile response body is null")
                         }

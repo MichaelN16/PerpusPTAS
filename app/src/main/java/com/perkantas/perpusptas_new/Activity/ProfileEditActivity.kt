@@ -43,7 +43,7 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
 
         //handle update profile
         binding.updateBtn.setOnClickListener {
-            validateData()
+            updateProfile()
         }
 
         binding.birthDatePickerBtn.setOnClickListener {
@@ -56,11 +56,15 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         val address = intent.getStringExtra("ADDRESS") ?: ""
         val birthPlace = intent.getStringExtra("BIRTH_PLACE") ?: ""
         val component = intent.getStringExtra("COMPONENT") ?: ""
+        val dateBirth = intent.getStringExtra("DATE") ?: ""
+        val number = intent.getStringExtra("PHONE") ?: ""
 
         // Populate the UI elements using View Binding
         binding.nameEt.setText(name)
         binding.addressEt.setText(address)
         binding.birthPlaceEt.setText(birthPlace)
+        binding.birthEt.setText(dateBirth)
+        binding.numberEt.setText(number)
         binding.componentAc.setText(component)
     }
 
@@ -99,36 +103,6 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
     private var phoneNumber : Long = 0
     private var component = ""
 
-    private fun validateData() {
-        //Input, gather all user information data
-        name = binding.nameEt.text.toString().trim()
-        address = binding.addressEt.text.toString().trim()
-        birthPlace = binding.birthPlaceEt.text.toString().trim()
-        component = binding.componentAc.text.toString().trim()
-        phoneNumber = binding.numberEt.text.toString().trim().toLong()
-        val phoneText = binding.numberEt.text.toString().trim()
-
-        ///Validate Data
-        if (name.isEmpty()) {
-            Toast.makeText(this, "Masukkan nama Anda", Toast.LENGTH_SHORT).show()
-        } else if (address.isEmpty()) {
-            Toast.makeText(this, "Masukkan alamat Anda", Toast.LENGTH_SHORT).show()
-        } else if (birthPlace.isEmpty()) {
-            Toast.makeText(this, "Masukkan tempat lahir Anda", Toast.LENGTH_SHORT).show()
-        } else if (component.isEmpty()) {
-            Toast.makeText(this, "Pilih komponen", Toast.LENGTH_SHORT).show()
-        } else if (phoneText.isEmpty()) {
-            Toast.makeText(this, "Masukkan nomor telepon", Toast.LENGTH_SHORT).show()
-        } else {
-            try {
-                phoneNumber = phoneText.toLong()
-                updateProfile()
-            } catch (e: NumberFormatException) {
-                Toast.makeText(this, "Format nomor telepon tidak valid", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     private fun updateProfile() {
         // Retrieve the entered data
         name = binding.nameEt.text.toString().trim()
@@ -143,7 +117,7 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
 
             // Convert the date to 'yyyy-MM-dd' format for Laravel
             val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            val formattedDate = outputFormat.format(birthDate)
+            val formattedDate = outputFormat.format(birthDate).toString()
 
             // Phone number validator
             phoneNumber = binding.numberEt.text.toString().trim().toLong()

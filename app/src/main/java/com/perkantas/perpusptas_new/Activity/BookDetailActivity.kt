@@ -34,10 +34,10 @@ class BookDetailActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
         userProfileCheck()
 
-        //handle click rent
+        /*//handle click rent
         binding.rentBookBtn.setOnClickListener {
             openAlertDialog()
-        }
+        }*/
 
         //handle back button
         binding.backBtn.setOnClickListener {
@@ -99,10 +99,11 @@ class BookDetailActivity : AppCompatActivity() {
         val authToken = "Bearer ${sessionManager.fetchAuthToken()}"
         apiClient.getApiService(this).checkUserProfile(token = authToken).enqueue(object : Callback<ProfileCheckResponse>{
             override fun onResponse(call: Call<ProfileCheckResponse>, response: Response<ProfileCheckResponse>) {
-                val results = response.body()!!.check
-                if(results.status == true){
+                val results = response.body()!!
+                if(results.status){
                     binding.rentBookBtn.setOnClickListener {
-                        startActivity(Intent(this@BookDetailActivity, RentActivity::class.java))
+                        Toast.makeText(this@BookDetailActivity, "Berhasil!", Toast.LENGTH_SHORT).show()
+                        //startActivity(Intent(this@BookDetailActivity, RentActivity::class.java))
                     }
                 } else {
                     binding.rentBookBtn.setBackgroundColor(Color.LTGRAY)
