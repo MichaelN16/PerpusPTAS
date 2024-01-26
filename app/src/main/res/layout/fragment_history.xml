@@ -6,23 +6,34 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/back01"
-    tools:context=".Fragment.HistoryFragment">
+    tools:context=".fragment.HistoryFragment">
 
-    <!--Categorized book state in tab-->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <!-- Search -->
+    <EditText
+        android:id="@+id/searchEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:layout_margin="5dp"
-        app:tabBackground="@drawable/tab_selector"
-        app:tabIndicatorFullWidth="false"
-        app:tabIndicatorHeight="0dp"
-        app:tabMode="scrollable"/>
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:drawableStart="@drawable/ic_search_gray"
+        android:hint="Cari"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/gray01"/>
 
-    <!--Show book activity based on selected tab-->
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
+    <!-- ProgressBar for loading indicator -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <!--RecycleView: Load Books-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/booksRv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_book_history"/>
 </LinearLayout>

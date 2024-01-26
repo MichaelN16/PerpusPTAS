@@ -4,6 +4,7 @@
     package="com.perkantas.perpusptas_new">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" tools:node="remove"/>
 
     <application
         android:allowBackup="true"
@@ -17,34 +18,31 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".RentActivity"
+            android:name=".activity.VerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.VerificationActivity"
+            android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".activity.BookDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.BookDetailActivity"
+            android:name=".activity.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.ForgotPasswordActivity"
+            android:name=".activity.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.RegisterActivity"
+            android:name=".activity.ProfileEditActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.ProfileEditActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".activity.LandingActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LandingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".Activity.SplashActivity"
+            android:name=".activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -52,6 +50,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".firebase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher_foreground" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
     </application>
 
 </manifest>

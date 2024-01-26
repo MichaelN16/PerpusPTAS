@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back01"
-    tools:context=".Fragment.LibraryFragment">
+    tools:context=".fragment.LibraryFragment">
 
     <!--Show book categories-->
     <com.google.android.material.tabs.TabLayout
@@ -25,5 +25,4 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-
 </LinearLayout>

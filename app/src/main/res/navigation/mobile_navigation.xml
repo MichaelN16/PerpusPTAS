@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/navigation_libraryNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.LibraryFragment"
+        android:name="com.perkantas.perpusptas_new.fragment.LibraryFragment"
         android:label="@string/title_library"
         tools:layout="@layout/fragment_library" />
 
     <fragment
         android:id="@+id/navigation_historyNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.HistoryFragment"
+        android:name="com.perkantas.perpusptas_new.fragment.HistoryFragment"
         android:label="@string/title_history"
         tools:layout="@layout/fragment_history" />
 
     <fragment
         android:id="@+id/navigation_notificationsNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.NotificationFragment"
+        android:name="com.perkantas.perpusptas_new.fragment.NotificationFragment"
         android:label="@string/title_notification"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
         android:id="@+id/navigation_accountNav"
-        android:name="com.perkantas.perpusptas_new.Fragment.AccountFragment"
+        android:name="com.perkantas.perpusptas_new.fragment.AccountFragment"
         android:label="@string/title_account"
         tools:layout="@layout/fragment_account" />
 </navigation>
