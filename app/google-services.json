@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "716660842297",
+    "firebase_url": "https://perpusptasnew-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "perpusptasnew",
+    "storage_bucket": "perpusptasnew.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716660842297:android:8ab33110e84808417e52e8",
+        "android_client_info": {
+          "package_name": "com.perkantas.perpusptas_new"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBesR8lZfPcdru29yWmdFBv85Pk6yDq60M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

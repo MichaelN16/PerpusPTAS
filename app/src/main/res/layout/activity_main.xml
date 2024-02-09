@@ -68,7 +68,8 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarContainer"/>
+        android:layout_below="@id/toolbarContainer"
+        android:layout_above="@id/nav_view"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -77,5 +78,4 @@
         android:background="?android:attr/windowBackground"
         app:menu="@menu/bottom_nav_menu"
         android:layout_alignParentBottom="true"/>
-
 </RelativeLayout>

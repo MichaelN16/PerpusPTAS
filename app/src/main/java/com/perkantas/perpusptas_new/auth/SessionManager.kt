@@ -2,6 +2,8 @@ package com.perkantas.perpusptas_new.auth
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
+import com.google.gson.Gson
 import com.perkantas.perpusptas_new.model.LoginResponse
 import com.perkantas.perpusptas_new.R
 import com.perkantas.perpusptas_new.model.MyProfileResponse
@@ -13,6 +15,7 @@ class SessionManager (context: Context) {
         const val USER_TOKEN = "user_token"
         const val USER_NAME = "user_name"
         const val USER_ID = "user_id"
+        const val USER_DATA = "user"
     }
 
     fun saveDataLog(data: LoginResponse.DataLog){
@@ -28,17 +31,17 @@ class SessionManager (context: Context) {
         editor.apply()
     }
 
+    fun saveUserData(value: MyProfileResponse.DataProf){
+        val editor = prefs.edit()
+        val json = Gson().toJson(value)
+        editor.putString(USER_DATA, json)
+        editor.apply()
+    }
+
     //func to save auth token
     fun saveAuthToken(token: String){
         val editor = prefs.edit()
         editor.putString(USER_TOKEN, token)
-        editor.apply()
-    }
-
-    //func to delete auth token
-    fun deleteAuthToken(){
-        val editor = prefs.edit()
-        editor.remove(USER_TOKEN)
         editor.apply()
     }
 
@@ -61,9 +64,26 @@ class SessionManager (context: Context) {
         return prefs.getInt(USER_ID, 0)
     }
 
+    fun fetchUserData(): MyProfileResponse.DataProf? {
+        val json = prefs.getString(USER_DATA, null)
+        return try {
+            Gson().fromJson(json, MyProfileResponse.DataProf::class.java)
+        }  catch (e: Exception) {
+            Log.e("SessionManager", "Error deserializing user data: ${e.message}" )
+            null
+        }
+    }
+
     fun clearUserData(){
         val editor = prefs.edit()
         editor.clear()
+        editor.apply()
+    }
+
+    //func to delete auth token
+    fun deleteAuthToken(){
+        val editor = prefs.edit()
+        editor.remove(USER_TOKEN)
         editor.apply()
     }
 

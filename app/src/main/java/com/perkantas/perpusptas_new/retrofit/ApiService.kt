@@ -41,4 +41,10 @@ interface ApiService {
     fun rentRequest(
         @Header("Authorization") token: String,
         @Body request: RentRequest): Call<RentResponse>
+
+    @GET(Constants.RENT_URL)
+    fun getRentList(
+        @Header("Authorization") token: String,
+        @Query("type") type: String
+    ): Call<RentHistoryResponse> //query status
 }

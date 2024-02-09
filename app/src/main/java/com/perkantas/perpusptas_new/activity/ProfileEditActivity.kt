@@ -13,6 +13,8 @@ import com.perkantas.perpusptas_new.model.MyProfileRequest
 import com.perkantas.perpusptas_new.R
 import com.perkantas.perpusptas_new.retrofit.ApiClient
 import com.perkantas.perpusptas_new.databinding.ActivityProfileEditBinding
+import com.perkantas.perpusptas_new.util.DatePickerFragment
+import com.perkantas.perpusptas_new.util.dateFormatConverter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,7 +22,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
+class ProfileEditActivity : AppCompatActivity(), DatePickerFragment.OnDateSelectedListener {
     private lateinit var binding: ActivityProfileEditBinding
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
@@ -50,7 +52,14 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
             showDatePickerDialog()
         }
 
-        // Retrieve data from Intent
+        val userData = sessionManager.fetchUserData()!!
+        binding.nameEt.setText(userData.name)
+        binding.addressEt.setText(userData.address)
+        binding.birthPlaceEt.setText(userData.birthPlace)
+        binding.birthEt.setText(dateFormatConverter(userData.birthDate,"dd/MM/yyyy"))
+        binding.numberEt.setText(userData.phone)
+
+        /*// Retrieve data from Intent
         val intent = intent
         val name = intent.getStringExtra("NAME") ?: ""
         val address = intent.getStringExtra("ADDRESS") ?: ""
@@ -63,30 +72,24 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         binding.addressEt.setText(address)
         binding.birthPlaceEt.setText(birthPlace)
         binding.birthEt.setText(dateBirth)
-        binding.numberEt.setText(number)
+        binding.numberEt.setText(number)*/
     }
 
     private fun showDatePickerDialog() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            this,
-            { _, selectedYear, selectedMonth, selectedDay ->
-                val selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                binding.birthEt.setText(selectedDate)
-            }, year, month, day
-        )
-        datePickerDialog.show()
+        val datePickerFragment = DatePickerFragment(this)
+        datePickerFragment.show(supportFragmentManager, "datePicker")
     }
 
-    // Implement onDateSet method
+    override fun onDateSelected(year: Int, month: Int, dayOfMonth: Int) {
+        val selectedDate = "$dayOfMonth/${month + 1}/$year"
+        binding.birthEt.setText(selectedDate)
+    }
+
+    /*// Implement onDateSet method
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, dayOfMonth)
-    }
+    }*/
 
     private fun loadArrayComponent() {
         val komponen = resources.getStringArray(R.array.komponen)
@@ -98,7 +101,7 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
     private var address = ""
     private var birthPlace = ""
     private lateinit var birthDate : Date
-    private var phoneNumber : Long = 0
+    private var phoneNumber = ""
     private var component = ""
 
     private fun updateProfile() {
@@ -106,6 +109,7 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         name = binding.nameEt.text.toString().trim()
         address = binding.addressEt.text.toString().trim()
         birthPlace = binding.birthPlaceEt.text.toString().trim()
+        phoneNumber = binding.numberEt.text.toString().trim()
         component = binding.componentAc.text.toString().trim()
 
         // Birth date validator
@@ -117,15 +121,11 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
             val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val formattedDate = outputFormat.format(birthDate).toString()
 
-            // Phone number validator
-            phoneNumber = binding.numberEt.text.toString().trim().toLong()
-
             // Create the MyProfileRequest object
             val updateRequest = MyProfileRequest(name, birthPlace, formattedDate, phoneNumber, address, component)
 
             // Retrieve the authentication token
             val token = "Bearer ${sessionManager.fetchAuthToken()}"
-            Log.d("Response : ", sessionManager.fetchAuthToken()!!)
 
             // Check if the token is not null before making the API call
             apiClient.getApiService(this).updateUserProfile(token, updateRequest)

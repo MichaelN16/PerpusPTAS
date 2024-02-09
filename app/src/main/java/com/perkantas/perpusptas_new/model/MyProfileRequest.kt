@@ -13,7 +13,7 @@ data class MyProfileRequest(
     var birthDate: String,
 
     @SerializedName("phone")
-    var phone: Long,
+    var phone: String,
 
     @SerializedName("address")
     var address: String,

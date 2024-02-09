@@ -92,6 +92,11 @@ class BookFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        loadBooks()
+        super.onResume()
+    }
+
     private fun loadBooks() {
         if(category == "Semua"){
             //load all books
@@ -192,7 +197,6 @@ class BookFragment : Fragment() {
                 }
             }
         })
-
         rvBook.adapter = adapterBook
     }
 

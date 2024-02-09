@@ -54,14 +54,14 @@ class LibraryFragment : Fragment() {
                     loadedCategoryList.add(0, allCategory)
 
                     setUpViewPager(loadedCategoryList)
-                    }
+                }
                 else{
                     Log.d("Response", "Gagal mengambil data kategori")
                 }
             }
 
             override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
-
+                Log.e("Response", "Failure due to ${t.message}", )
             }
         })
     }

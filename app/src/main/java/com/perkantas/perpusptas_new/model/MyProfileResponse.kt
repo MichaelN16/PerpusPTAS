@@ -30,7 +30,7 @@ data class MyProfileResponse(
         var birthDate: Date,
 
         @SerializedName("phone")
-        var phone: Number,
+        var phone: String,
 
         @SerializedName("address")
         var address: String,

@@ -45,16 +45,23 @@ class AccountFragment : Fragment() {
         }
 
         binding.updateBtn.setOnClickListener {
-            // Pass the profile data to ProfileEditActivity
-            val intent = Intent(requireContext(), ProfileEditActivity::class.java)
+        startActivity(Intent(activity, ProfileEditActivity::class.java))
+        // Pass the profile data to ProfileEditActivity
+            /*val intent = Intent(requireContext(), ProfileEditActivity::class.java)
             intent.putExtra("NAME", binding.nameTv.text.toString())
             intent.putExtra("ADDRESS", binding.addressTv.text.toString())
             intent.putExtra("BIRTH_PLACE", binding.birthPlaceTv.text.toString())
             intent.putExtra("PHONE", binding.phoneTv.text.toString())
             intent.putExtra("DATE", binding.birthDateTv.text.toString())
-            startActivity(intent)
+            startActivity(intent)*/
         }
         return binding.root
+    }
+
+    override fun onResume() {
+        //load data when fragment clicked
+        fetchProfile()
+        super.onResume()
     }
 
     private fun fetchProfile() {
@@ -70,8 +77,9 @@ class AccountFragment : Fragment() {
                     // Handle function to display profile
                     if (response.isSuccessful) {
                         val profile = response.body()!!.dataProf
-                        val userId = sessionManager.saveUserId(profile)
-                        Log.d("User Id", userId.toString())
+                        //val userId = sessionManager.saveUserId(profile)
+                        Log.d("Auth Token", "Bearer ${sessionManager.fetchAuthToken()}")
+                        sessionManager.saveUserData(profile)
                         //convert date
                         val formattedDate = dateFormatConverter(profile.birthDate,"dd/MM/yyyy")
                         binding.nameTv.text = profile.name
@@ -80,7 +88,7 @@ class AccountFragment : Fragment() {
                         binding.birthPlaceTv.text = profile.birthPlace
                         binding.componentTv.text = profile.component
                         binding.birthDateTv.text = formattedDate
-                        binding.phoneTv.text = profile.phone.toString()
+                        binding.phoneTv.text = profile.phone
                     } else {
                         Log.e("AccountFragment", "Profile response is not successful. Code: ${response.code()}")
                     }

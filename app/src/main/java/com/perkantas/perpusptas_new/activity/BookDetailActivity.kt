@@ -35,9 +35,18 @@ class BookDetailActivity : AppCompatActivity() {
 
         apiClient = ApiClient()
         sessionManager = SessionManager(this)
-        token = "Bearer ${sessionManager.fetchAuthToken()}"
 
-        userProfileCheck()
+        // Check if the user is logged in
+        if (sessionManager.isLoggedIn()) {
+            token = "Bearer ${sessionManager.fetchAuthToken()}"
+
+            // Fetch the user profile and book data
+            userProfileCheck()
+        } else {
+            // Redirect to the login screen
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish() // Close this activity to prevent returning to it after login
+        }
 
         //handle back button
         binding.backBtn.setOnClickListener {
@@ -74,14 +83,19 @@ class BookDetailActivity : AppCompatActivity() {
         apiClient.getApiService(this).checkUserProfile(token)
             .enqueue(object : Callback<ProfileCheckResponse> {
                 override fun onResponse(call: Call<ProfileCheckResponse>, response: Response<ProfileCheckResponse>) {
-                    val results = response.body()!!
-                    if (results.status) {
-                        Log.d("Response", "Profile is completed!")
+                    val results = response.body()
+                    Log.d("Response", "Profile check response: $results") // Add this line for debugging
+                    if (results?.status == true) {
                         binding.rentBookBtn.setOnClickListener {
-                            val userId = sessionManager.fetchUserId()
-                            val bookId = bookData.id
-                            Log.d("Data", "$userId, $bookId")
-                            showRentDetailDialog(userId,bookId)
+                            if(bookData.stock > 0){
+                                val userId = sessionManager.fetchUserId()
+                                val bookId = bookData.id
+                                showRentDetailDialog(userId,bookId)
+                                Log.d("Response", "Profile is completed!")
+                            } else {
+                                Toast.makeText(this@BookDetailActivity, "Buku tidak dapat dipinjam karena stok habis!", Toast.LENGTH_SHORT).show()
+                            }
+
                         }
                     } else {
                         Log.d("Response", "Profile not completed yet!")
@@ -90,9 +104,8 @@ class BookDetailActivity : AppCompatActivity() {
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<ProfileCheckResponse>, t: Throwable) {
-                    Toast.makeText(this@BookDetailActivity, "Failed to fetch data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@BookDetailActivity, "Gagal mengambil data karena ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -131,6 +144,7 @@ class BookDetailActivity : AppCompatActivity() {
         apiClient.getApiService(this).rentRequest(token, rentRequest).enqueue(object : Callback<RentResponse>{
             override fun onResponse(call: Call<RentResponse>, response: Response<RentResponse>) {
                 if (response.isSuccessful){
+
                     Log.d("Response", "Rent success!")
                 } else {
                     Log.d("Response", "Rent failed! ${response.body().toString()}")
