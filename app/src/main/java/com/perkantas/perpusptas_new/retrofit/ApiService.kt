@@ -47,4 +47,8 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Query("type") type: String
     ): Call<RentHistoryResponse> //query status
+
+    @GET(Constants.NOTIFICATION_URL)
+    fun getNotification(
+        @Header("Authorization") token: String): Call<NotificationResponse>
 }

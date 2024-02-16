@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.perkantas.perpusptas_new.adapter.AdapterHistory
@@ -17,14 +17,10 @@ import com.perkantas.perpusptas_new.databinding.FragmentRentListBinding
 import com.perkantas.perpusptas_new.model.RentHistoryResponse
 import com.perkantas.perpusptas_new.retrofit.ApiClient
 import com.perkantas.perpusptas_new.util.dateConverter
-import com.perkantas.perpusptas_new.util.dateFormatConverter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.util.*
-import kotlin.collections.ArrayList
 
 class RentListFragment : Fragment() {
     private lateinit var binding: FragmentRentListBinding
@@ -154,10 +150,10 @@ class RentListFragment : Fragment() {
         val currentDate = LocalDate.now().toString()
         val formattedDate = dateConverter(currentDate, "yyyy-MM-dd", "dd/MM/yyyy")
         return when {
-            rentedBook.date_due.isNullOrEmpty() -> "Pending"
-            rentedBook.date_return.isNullOrEmpty() -> "Renting"
-            formattedDate >= rentedBook.date_due -> "Overdue"
-            else -> "Finish"
+            rentedBook.date_due.isNullOrEmpty() -> "Menunggu"
+            rentedBook.date_return.isNullOrEmpty() -> "Meminjam"
+            formattedDate >= rentedBook.date_due -> "Terlambat"
+            else -> "Selesai"
         }
     }
 }

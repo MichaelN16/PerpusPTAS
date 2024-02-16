@@ -67,10 +67,10 @@ class AdapterHistory(var data : ArrayList<RentHistoryResponse.RentData>, private
         val currentDate = LocalDate.now().toString()
         val formattedDate = dateConverter(currentDate, "yyyy-MM-dd", "dd/MM/yyyy")
         return when {
-            rentedBook.date_due.isNullOrEmpty() -> "Pending"
-            rentedBook.date_return.isNullOrEmpty() -> "Renting"
-            formattedDate >= rentedBook.date_due -> "Overdue"
-            else -> "Finish"
+            rentedBook.date_due.isNullOrEmpty() -> "Menunggu"
+            rentedBook.date_return.isNullOrEmpty() -> "Meminjam"
+            formattedDate >= rentedBook.date_due -> "Terlambat"
+            else -> "Selesai"
         }
     }
 

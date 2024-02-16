@@ -22,7 +22,7 @@ class FilterRent(
                 }
             }
             results.count = filteredModels.size
-            results.values
+            results.values = filteredModels
         }
         else{
             results.count = filterList.size

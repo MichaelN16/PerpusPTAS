@@ -192,7 +192,7 @@ class BookFragment : Fragment() {
                 } else {
                     // Go to verification class
                     Log.d("AdapterBook", "User is not logged in")
-                    Toast.makeText(requireContext(), "User is not logged in", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Silahkan masuk untuk menggunakan fitur ini", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(requireContext(), VerificationActivity::class.java))
                 }
             }

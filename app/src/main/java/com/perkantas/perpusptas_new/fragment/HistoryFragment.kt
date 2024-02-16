@@ -42,10 +42,10 @@ class HistoryFragment : Fragment() {
     private fun setupViewPager() {
         // Create your list of rent statuses here
         val rentStatusList = listOf(
-            RentStatus("pending", "Pending"),
-            RentStatus("renting", "Renting"),
-            RentStatus("overdue", "Overdue"),
-            RentStatus("finish", "Finish")
+            RentStatus("pending", "Menunggu"),
+            RentStatus("renting", "Meminjam"),
+            RentStatus("overdue", "Terlambat"),
+            RentStatus("finish", "Selesai")
         )
 
         // Pass the rentStatusList to the adapter
