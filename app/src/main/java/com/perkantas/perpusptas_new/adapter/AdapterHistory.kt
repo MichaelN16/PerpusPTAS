@@ -13,10 +13,14 @@ import com.perkantas.perpusptas_new.activity.FilterRent
 import com.perkantas.perpusptas_new.databinding.ItemBookHistoryBinding
 import com.perkantas.perpusptas_new.model.RentHistoryResponse
 import com.perkantas.perpusptas_new.util.dateConverter
-import com.perkantas.perpusptas_new.util.dateFormatConverter
+import com.perkantas.perpusptas_new.util.getStatus
 import java.time.LocalDate
 
-class AdapterHistory(var data : ArrayList<RentHistoryResponse.RentData>, private var filterList: ArrayList<RentHistoryResponse.RentData> = data): RecyclerView.Adapter<AdapterHistory.Holder>(), Filterable {
+class AdapterHistory(
+    var data : ArrayList<RentHistoryResponse.RentData>,
+    private val listener: OnAdapterListener,
+    private var filterList: ArrayList<RentHistoryResponse.RentData>)
+    : RecyclerView.Adapter<AdapterHistory.Holder>(), Filterable {
 
     private var filter: FilterRent? = null
 
@@ -57,31 +61,24 @@ class AdapterHistory(var data : ArrayList<RentHistoryResponse.RentData>, private
             holder.binding.progressBar.visibility = View.GONE
         }
 
-        /*//on click to show rent detail
+        //on click to show rent detail
         holder.itemView.setOnClickListener{
             listener.onClick(rentedBook)
-        }*/
-    }
-
-    private fun getStatus(rentedBook: RentHistoryResponse.RentData): CharSequence? {
-        val currentDate = LocalDate.now().toString()
-        val formattedDate = dateConverter(currentDate, "yyyy-MM-dd", "dd/MM/yyyy")
-        return when {
-            rentedBook.date_due.isNullOrEmpty() -> "Menunggu"
-            rentedBook.date_return.isNullOrEmpty() -> "Meminjam"
-            formattedDate >= rentedBook.date_due -> "Terlambat"
-            else -> "Selesai"
         }
-    }
-
-    override fun getFilter(): Filter {
-        if (filter == null){
-            filter = FilterRent(data, this)
-        }
-        return filter as FilterRent
     }
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    override fun getFilter(): Filter {
+        if (filter == null){
+            filter = FilterRent(filterList, this)
+        }
+        return filter as FilterRent
+    }
+
+    interface OnAdapterListener{
+        fun onClick(data: RentHistoryResponse.RentData)
     }
 }

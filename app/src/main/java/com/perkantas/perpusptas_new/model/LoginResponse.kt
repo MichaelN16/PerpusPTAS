@@ -20,5 +20,3 @@ data class LoginResponse(
         var name: String
     )
 }
-
-

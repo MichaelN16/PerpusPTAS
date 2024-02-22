@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white"
-    tools:context=".activity.BookDetailActivity">
+    tools:context=".activity.HistoryDetailActivity">
 
     <!--Toolbar-->
     <RelativeLayout
@@ -27,65 +29,58 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Detail Buku"
+            android:text="Detail Peminjaman"
             android:textColor="@color/white"
             android:textStyle="bold" />
     </RelativeLayout>
 
-    <!--All content under scrollview-->
     <ScrollView
-        android:layout_above="@id/bookOptionsLl"
+        android:id="@+id/historyOption"
         android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_below="@id/toolbarRL"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--Book info-->
             <RelativeLayout
+                android:layout_width="110dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:background="@color/gray02"
+                android:layout_marginTop="10dp">
+                <ImageView
+                    android:id="@+id/coverBook"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </RelativeLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!--Book preview-->
-                <RelativeLayout
-                    android:id="@+id/pdfRl"
-                    android:layout_width="110dp"
-                    android:layout_height="150dp"
-                    android:layout_marginEnd="5dp"
-                    android:background="@color/gray02">
-                    <!--Cover view-->
-                    <ImageView
-                        android:id="@+id/coverBookIv"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                    <!--Progress bar-->
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:visibility="visible"/>
-                </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
                 <!--Book title-->
                 <TextView
                     android:id="@+id/titleTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_toEndOf="@id/pdfRl"
                     android:text="Judul Buku"/>
-
                 <!--Table-->
                 <TableLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/titleTv"
-                    android:layout_toEndOf="@id/pdfRl">
+                    android:layout_below="@id/titleTv">
                     <!--Book Index row-->
                     <TableRow>
                         <TextView
                             android:id="@+id/bookIndLabelTv"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nomor Buku"
@@ -93,7 +88,7 @@
                         <TextView
                             android:id="@+id/bookIndTv"
                             android:layout_weight="1"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="N/A"
@@ -105,7 +100,7 @@
                         android:layout_marginTop="5dp">
                         <TextView
                             android:id="@+id/categoryLabelTv"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Kategori"
@@ -113,7 +108,7 @@
                         <TextView
                             android:id="@+id/categoryTv"
                             android:layout_weight="1"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="N/A"
@@ -124,16 +119,16 @@
                     <TableRow
                         android:layout_marginTop="5dp">
                         <TextView
-                            android:id="@+id/authorLabelTv"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            android:id="@+id/statusLabelTv"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Penulis"
+                            android:text="Status"
                             android:layout_marginEnd="5dp"/>
                         <TextView
-                            android:id="@+id/authorTv"
+                            android:id="@+id/statusTv"
                             android:layout_weight="1"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="N/A"
@@ -144,16 +139,16 @@
                     <TableRow
                         android:layout_marginTop="5dp">
                         <TextView
-                            android:id="@+id/publisherLabelTv"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            android:id="@+id/rentLabelTv"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Penerbit"
+                            android:text="Tanggal Pinjam"
                             android:layout_marginEnd="5dp"/>
                         <TextView
-                            android:id="@+id/publisherTv"
+                            android:id="@+id/rentTv"
                             android:layout_weight="1"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="N/A"
@@ -164,50 +159,52 @@
                     <TableRow
                         android:layout_marginTop="5dp">
                         <TextView
-                            android:id="@+id/stockLabelTv"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            android:id="@+id/dueLabelTv"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Eksemplar"
+                            android:text="Tanggal Tenggat"
                             android:layout_marginEnd="5dp"/>
                         <TextView
-                            android:id="@+id/stockTv"
+                            android:id="@+id/dueTv"
                             android:layout_weight="1"
-                            style="@style/TextAppearance.MaterialComponents.Caption"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="N/A"
+                            android:layout_marginEnd="5dp"/>
+                    </TableRow>
+
+                    <!--Stock row-->
+                    <TableRow
+                        android:layout_marginTop="5dp">
+                        <TextView
+                            android:id="@+id/returnLabelTv"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tanggal Kembali"
+                            android:layout_marginEnd="5dp"/>
+                        <TextView
+                            android:id="@+id/returnTv"
+                            android:layout_weight="1"
+                            style="@style/TextAppearance.MaterialComponents.Body2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="N/A"
                             android:layout_marginEnd="5dp"/>
                     </TableRow>
                 </TableLayout>
-            </RelativeLayout>
-            <!--Book description-->
-            <TextView
-                android:id="@+id/descriptionTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="Deskripsi buku"
-                android:textColor="@color/black"/>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <!--Bottom button for book options-->
-    <LinearLayout
-        android:id="@+id/bookOptionsLl"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:background="@color/design_default_color_primary">
-        <!--Read book button-->
-        <Button
-            android:id="@+id/rentBookBtn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:text="Pinjam Buku"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_book_white"/>
-    </LinearLayout>
-</RelativeLayout>
+        android:text="Harap kembalikan buku tepat waktu!"
+        android:padding="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+</LinearLayout>

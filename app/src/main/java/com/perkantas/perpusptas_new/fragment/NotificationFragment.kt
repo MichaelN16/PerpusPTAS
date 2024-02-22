@@ -1,13 +1,16 @@
 package com.perkantas.perpusptas_new.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.perkantas.perpusptas_new.activity.NotificationDetailActivity
 import com.perkantas.perpusptas_new.adapter.AdapterNotification
 import com.perkantas.perpusptas_new.auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.FragmentNotificationBinding
@@ -37,9 +40,18 @@ class NotificationFragment : Fragment() {
         sessionManager = SessionManager(requireContext())
         apiClient = ApiClient()
 
+        //progress bar
+        val progressBar = binding.progressBar
+        progressBar.visibility = View.VISIBLE
+
         fetchNotification()
 
         return view
+    }
+
+    override fun onResume() {
+        fetchNotification()
+        super.onResume()
     }
 
     private var listNotification = ArrayList<NotificationResponse.Data>()
@@ -47,12 +59,18 @@ class NotificationFragment : Fragment() {
     private fun fetchNotification() {
         listNotification.clear()
         val token = "Bearer ${sessionManager.fetchAuthToken()}"
+
+
         apiClient.getApiService(requireContext()).getNotification(token).enqueue(object : Callback<NotificationResponse>{
             override fun onFailure(call: Call<NotificationResponse>, t: Throwable) {
+                binding.progressBar.visibility = View.GONE
                 Log.d(TAG, t.message.toString())
+                Toast.makeText(requireContext(), "Tidak terhubung dengan internet", Toast.LENGTH_SHORT).show()
+                return
             }
 
             override fun onResponse(call: Call<NotificationResponse>, response: Response<NotificationResponse>) {
+                binding.progressBar.visibility = View.GONE
                 val notificationResponse = response.body()!!
 
                 if (response.isSuccessful){
@@ -71,9 +89,21 @@ class NotificationFragment : Fragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         rvNotification.layoutManager = layoutManager
 
-        adapterNotification = AdapterNotification(listNotification)
-        rvNotification.adapter = adapterNotification
+        if (listNotification.isEmpty()){
+            rvNotification.visibility = View.GONE
+            binding.noItemTv.visibility = View.VISIBLE
+        } else {
+            binding.noItemTv.visibility = View.GONE
+
+            adapterNotification = AdapterNotification(listNotification, object : AdapterNotification.OnAdapterListener{
+                override fun onClick(data: NotificationResponse.Data) {
+                    val intent = Intent(requireContext(), NotificationDetailActivity::class.java)
+                    intent.putExtra("dataNotification", data)
+                    startActivity(intent)
+                }
+            })
+            rvNotification.adapter = adapterNotification
+        }
 
     }
-
 }

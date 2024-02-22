@@ -154,7 +154,6 @@ class BookFragment : Fragment() {
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(requireContext(),"Gagal mengambil data buku karena ${t.message}", Toast.LENGTH_SHORT).show()
             }
-
         })
     }
 
@@ -168,36 +167,37 @@ class BookFragment : Fragment() {
         rvBook.layoutManager = layoutManager
 
         val filteredBooks: List<BookResponse.DataBook> = if (category == "Semua") {
-            // If the category is "Semua," show all books without filtering
-            Log.d("BookFragment", "Showing all books")
+
             listBook
         } else {
-            // If it's another category, filter the books based on the selected category
-            Log.d("BookFragment", "Filtering books for category: $category")
             listBook.filter { it.category == category }
         }
 
-        // Log the number of books after filtering
-        Log.d("BookFragment", "Number of books after filtering: ${filteredBooks.size}")
+        if(filteredBooks.isEmpty()){
+            binding.searchEt.visibility = View.GONE
+            binding.booksRv.visibility = View.GONE
+            binding.noItemTv.visibility = View.VISIBLE
+        } else {
+            adapterBook = AdapterBook(filteredBooks as ArrayList<BookResponse.DataBook>,
+                filteredBooks, object : AdapterBook.OnAdapterListener {
 
-        adapterBook = AdapterBook(filteredBooks as ArrayList<BookResponse.DataBook>,
-            filteredBooks, object : AdapterBook.OnAdapterListener {
-            // Implement onClick
-            override fun onClick(data: BookResponse.DataBook) {
-                if (sessionManager.isLoggedIn()) {
-                    // Handle the click event here
-                    val intent = Intent(requireContext(), BookDetailActivity::class.java)
-                    intent.putExtra("dataBook", data)
-                    startActivity(intent)
-                } else {
-                    // Go to verification class
-                    Log.d("AdapterBook", "User is not logged in")
-                    Toast.makeText(requireContext(), "Silahkan masuk untuk menggunakan fitur ini", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(requireContext(), VerificationActivity::class.java))
-                }
-            }
-        })
-        rvBook.adapter = adapterBook
+                    // Implement onClick
+                    override fun onClick(data: BookResponse.DataBook) {
+                        if (sessionManager.isLoggedIn()) {
+                            // Handle the click event here
+                            val intent = Intent(requireContext(), BookDetailActivity::class.java)
+                            intent.putExtra("dataBook", data)
+                            startActivity(intent)
+                        } else {
+                            // Go to verification class
+                            Log.d("AdapterBook", "User is not logged in")
+                            Toast.makeText(requireContext(), "Silahkan masuk untuk menggunakan fitur ini", Toast.LENGTH_SHORT).show()
+                            startActivity(Intent(requireContext(), VerificationActivity::class.java))
+                        }
+                    }
+                })
+            rvBook.adapter = adapterBook
+        }
     }
 
 }

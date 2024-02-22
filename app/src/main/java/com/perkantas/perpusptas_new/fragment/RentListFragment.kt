@@ -1,5 +1,6 @@
 package com.perkantas.perpusptas_new.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,12 +12,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.perkantas.perpusptas_new.activity.HistoryDetailActivity
+import com.perkantas.perpusptas_new.adapter.AdapterBook
 import com.perkantas.perpusptas_new.adapter.AdapterHistory
 import com.perkantas.perpusptas_new.auth.SessionManager
 import com.perkantas.perpusptas_new.databinding.FragmentRentListBinding
 import com.perkantas.perpusptas_new.model.RentHistoryResponse
 import com.perkantas.perpusptas_new.retrofit.ApiClient
 import com.perkantas.perpusptas_new.util.dateConverter
+import com.perkantas.perpusptas_new.util.getStatus
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -141,19 +145,14 @@ class RentListFragment : Fragment() {
             val rentDataList = mappedRentList.map { it.first }
 
             // Create an adapter and set it to the RecyclerView
-            adapterHistory = AdapterHistory(ArrayList(rentDataList))
+            adapterHistory = AdapterHistory(ArrayList(rentDataList), object : AdapterHistory.OnAdapterListener {
+                override fun onClick(data: RentHistoryResponse.RentData) {
+                    val intent = Intent(requireContext(), HistoryDetailActivity::class.java)
+                    intent.putExtra("dataHistory", data)
+                    startActivity(intent)
+                }
+            }, ArrayList(rentDataList))
             rvRent.adapter = adapterHistory
-        }
-    }
-
-    private fun getStatus(rentedBook: RentHistoryResponse.RentData) : CharSequence? {
-        val currentDate = LocalDate.now().toString()
-        val formattedDate = dateConverter(currentDate, "yyyy-MM-dd", "dd/MM/yyyy")
-        return when {
-            rentedBook.date_due.isNullOrEmpty() -> "Menunggu"
-            rentedBook.date_return.isNullOrEmpty() -> "Meminjam"
-            formattedDate >= rentedBook.date_due -> "Terlambat"
-            else -> "Selesai"
         }
     }
 }

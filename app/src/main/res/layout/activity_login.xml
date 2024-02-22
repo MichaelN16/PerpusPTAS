@@ -60,7 +60,7 @@
                     android:background="@drawable/shape_edittext01"
                     android:drawableStart="@drawable/ic_email_gray"
                     android:drawablePadding="10dp"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textNoSuggestions"
                     android:hint="Email"
                     android:padding="10dp"
                     android:textColor="@color/black"

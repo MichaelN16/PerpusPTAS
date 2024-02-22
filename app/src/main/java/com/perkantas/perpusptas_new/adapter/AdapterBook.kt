@@ -13,7 +13,11 @@ import com.perkantas.perpusptas_new.model.BookResponse
 import com.perkantas.perpusptas_new.R
 import com.perkantas.perpusptas_new.databinding.RowBookListBinding
 
-class AdapterBook(var data: ArrayList<BookResponse.DataBook>, private var filterList: ArrayList<BookResponse.DataBook>, val listener: OnAdapterListener): RecyclerView.Adapter<AdapterBook.Holder>(), Filterable {
+class AdapterBook(
+    var data: ArrayList<BookResponse.DataBook>,
+    private var filterList: ArrayList<BookResponse.DataBook>,
+    private val listener: OnAdapterListener)
+    : RecyclerView.Adapter<AdapterBook.Holder>(), Filterable {
 
     private var filter: FilterBook? = null
 

@@ -51,4 +51,20 @@ interface ApiService {
     @GET(Constants.NOTIFICATION_URL)
     fun getNotification(
         @Header("Authorization") token: String): Call<NotificationResponse>
+
+    @POST(Constants.NOTIFICATION_URL_READ)
+    fun sendReadMark(
+        @Header("Authorization") token:String,
+        @Path("id") notificationId: String) : Call<NotificationResponse>
+
+    @POST(Constants.PASSWORD_CHANGE_URL)
+    fun passwordChange(
+        @Header("Authorization") token:String,
+        @Body request: PasswordChangeRequest) : Call<PasswordChangeResponse>
+
+    @FormUrlEncoded
+    @POST(Constants.PASSWORD_RESET)
+    fun passwordReset(
+        @Field("email") email:String
+    ) : Call<PasswordResetResponse>
 }

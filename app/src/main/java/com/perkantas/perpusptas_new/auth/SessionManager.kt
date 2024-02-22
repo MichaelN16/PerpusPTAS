@@ -14,7 +14,6 @@ class SessionManager (context: Context) {
     companion object{
         const val USER_TOKEN = "user_token"
         const val USER_NAME = "user_name"
-        const val USER_ID = "user_id"
         const val USER_DATA = "user"
     }
 
@@ -22,12 +21,6 @@ class SessionManager (context: Context) {
         val editor = prefs.edit()
         editor.putString(USER_NAME, data.name)
         editor.putString(USER_TOKEN, data.authToken)
-        editor.apply()
-    }
-
-    fun saveUserId(data: MyProfileResponse.DataProf){
-        val editor = prefs.edit()
-        editor.putInt(USER_ID, data.id)
         editor.apply()
     }
 
@@ -58,10 +51,6 @@ class SessionManager (context: Context) {
             prefs.getString(USER_TOKEN, null)!!,
             prefs.getString(USER_NAME, null)!!
         )
-    }
-
-    fun fetchUserId(): Int{
-        return prefs.getInt(USER_ID, 0)
     }
 
     fun fetchUserData(): MyProfileResponse.DataProf? {

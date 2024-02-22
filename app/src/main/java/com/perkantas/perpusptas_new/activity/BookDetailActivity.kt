@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
@@ -88,9 +90,8 @@ class BookDetailActivity : AppCompatActivity() {
                     if (results?.status == true) {
                         binding.rentBookBtn.setOnClickListener {
                             if(bookData.stock > 0){
-                                val userId = sessionManager.fetchUserId()
                                 val bookId = bookData.id
-                                showRentDetailDialog(userId,bookId)
+                                showRentDetailDialog(bookId)
                                 Log.d("Response", "Profile is completed!")
                             } else {
                                 Toast.makeText(this@BookDetailActivity, "Buku tidak dapat dipinjam karena stok habis!", Toast.LENGTH_SHORT).show()
@@ -125,12 +126,12 @@ class BookDetailActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun showRentDetailDialog(userId: Int, bookId: Int) {
+    private fun showRentDetailDialog(bookId: Int) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Konfirmasi Pengajuan Pinjam Buku")
         builder.setMessage("Apakah Anda yakin ingin meminjam buku ini? Pastikan Anda sudah berada di perpustakaan untuk mengambil buku!")
         builder.setPositiveButton("Ya") { dialog, which ->
-            sendRentRequest(userId, bookId)
+            sendRentRequest(bookId)
         }
         builder.setNegativeButton("Batalkan") { dialog, which ->
             dialog.dismiss()
@@ -139,15 +140,17 @@ class BookDetailActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun sendRentRequest(userId: Int, bookId: Int) {
-        val rentRequest = RentRequest(userId, bookId)
+    private fun sendRentRequest(bookId: Int) {
+        val rentRequest = RentRequest(bookId)
         apiClient.getApiService(this).rentRequest(token, rentRequest).enqueue(object : Callback<RentResponse>{
             override fun onResponse(call: Call<RentResponse>, response: Response<RentResponse>) {
                 if (response.isSuccessful){
 
                     Log.d("Response", "Rent success!")
+                    rentSuccessDialog()
                 } else {
                     Log.d("Response", "Rent failed! ${response.body().toString()}")
+                    Toast.makeText(this@BookDetailActivity, "Gagal mengajukan peminjaman karena ${response.body().toString()}", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -157,5 +160,20 @@ class BookDetailActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    private fun rentSuccessDialog() {
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.rent_success_dialog, null)
+        val builder = AlertDialog.Builder(this)
+        builder.setView(dialogView)
+
+        val btnConfirm = dialogView.findViewById<Button>(R.id.confirmBtn)
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+
+        btnConfirm.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }

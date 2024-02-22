@@ -58,21 +58,6 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerFragment.OnDateSelect
         binding.birthPlaceEt.setText(userData.birthPlace)
         binding.birthEt.setText(dateFormatConverter(userData.birthDate,"dd/MM/yyyy"))
         binding.numberEt.setText(userData.phone)
-
-        /*// Retrieve data from Intent
-        val intent = intent
-        val name = intent.getStringExtra("NAME") ?: ""
-        val address = intent.getStringExtra("ADDRESS") ?: ""
-        val birthPlace = intent.getStringExtra("BIRTH_PLACE") ?: ""
-        val dateBirth = intent.getStringExtra("DATE") ?: ""
-        val number = intent.getStringExtra("PHONE") ?: ""
-
-        // Populate the UI elements using View Binding
-        binding.nameEt.setText(name)
-        binding.addressEt.setText(address)
-        binding.birthPlaceEt.setText(birthPlace)
-        binding.birthEt.setText(dateBirth)
-        binding.numberEt.setText(number)*/
     }
 
     private fun showDatePickerDialog() {

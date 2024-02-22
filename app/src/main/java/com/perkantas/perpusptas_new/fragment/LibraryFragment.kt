@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
@@ -62,6 +63,8 @@ class LibraryFragment : Fragment() {
 
             override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
                 Log.e("Response", "Failure due to ${t.message}", )
+                Toast.makeText(requireContext(), "Tidak terhubung dengan internet", Toast.LENGTH_SHORT).show()
+                return
             }
         })
     }

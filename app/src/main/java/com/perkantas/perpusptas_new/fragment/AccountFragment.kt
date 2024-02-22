@@ -7,7 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.perkantas.perpusptas_new.activity.ForgotPasswordActivity
+import com.perkantas.perpusptas_new.activity.PasswordChangeActivity
 import com.perkantas.perpusptas_new.activity.ProfileEditActivity
 import com.perkantas.perpusptas_new.model.MyProfileResponse
 import com.perkantas.perpusptas_new.retrofit.ApiClient
@@ -41,19 +43,11 @@ class AccountFragment : Fragment() {
         }
 
         binding.passwordTv.setOnClickListener {
-            startActivity(Intent(requireContext(), ForgotPasswordActivity::class.java))
+            startActivity(Intent(requireContext(), PasswordChangeActivity::class.java))
         }
 
         binding.updateBtn.setOnClickListener {
-        startActivity(Intent(activity, ProfileEditActivity::class.java))
-        // Pass the profile data to ProfileEditActivity
-            /*val intent = Intent(requireContext(), ProfileEditActivity::class.java)
-            intent.putExtra("NAME", binding.nameTv.text.toString())
-            intent.putExtra("ADDRESS", binding.addressTv.text.toString())
-            intent.putExtra("BIRTH_PLACE", binding.birthPlaceTv.text.toString())
-            intent.putExtra("PHONE", binding.phoneTv.text.toString())
-            intent.putExtra("DATE", binding.birthDateTv.text.toString())
-            startActivity(intent)*/
+            startActivity(Intent(activity, ProfileEditActivity::class.java))
         }
         return binding.root
     }
@@ -71,6 +65,8 @@ class AccountFragment : Fragment() {
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
                     // Error fetching posts
                     Log.e("Message", "${t.message}")
+                    Toast.makeText(requireContext(), "Tidak terhubung dengan internet", Toast.LENGTH_SHORT).show()
+                    return
                 }
 
                 override fun onResponse(call: Call<MyProfileResponse>, response: Response<MyProfileResponse>) {

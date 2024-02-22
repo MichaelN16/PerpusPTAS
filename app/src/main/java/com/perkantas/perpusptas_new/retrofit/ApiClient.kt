@@ -44,3 +44,8 @@ class ApiClient {
         return apiService
     }
 }
+    /*private fun okhttpClient(context: Context): OkHttpClient{
+        return OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(context))
+            .build()
+    }*/

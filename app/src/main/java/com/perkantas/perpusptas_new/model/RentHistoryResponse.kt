@@ -1,9 +1,11 @@
 package com.perkantas.perpusptas_new.model
 
+import java.io.Serializable
+
 data class RentHistoryResponse(
     val success: Boolean,
     val message: String,
-    val data: List<RentData>
+    val data: ArrayList<RentData>
 ) {
     data class RentData(
     val id: Int,
@@ -15,7 +17,7 @@ data class RentHistoryResponse(
     val date_return: String?,
     val status: Int?,
     val book: Book
-)
+) : Serializable
     {
         data class Book(
             val id: Int,
@@ -25,6 +27,6 @@ data class RentHistoryResponse(
             val book_cover: String,
             //progress bar to load book cover
             var isLoading: Boolean = false
-        )
+        ) : Serializable
     }
 }
