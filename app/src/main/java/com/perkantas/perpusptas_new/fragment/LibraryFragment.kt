@@ -57,12 +57,11 @@ class LibraryFragment : Fragment() {
                     setUpViewPager(loadedCategoryList)
                 }
                 else{
-                    Log.d("Response", "Gagal mengambil data kategori")
+
                 }
             }
 
             override fun onFailure(call: Call<CategoryResponse>, t: Throwable) {
-                Log.e("Response", "Failure due to ${t.message}", )
                 Toast.makeText(requireContext(), "Tidak terhubung dengan internet", Toast.LENGTH_SHORT).show()
                 return
             }

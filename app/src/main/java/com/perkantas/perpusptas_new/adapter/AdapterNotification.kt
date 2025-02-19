@@ -1,17 +1,11 @@
 package com.perkantas.perpusptas_new.adapter
 
-import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.perkantas.perpusptas_new.databinding.ItemNotificationBinding
 import com.perkantas.perpusptas_new.model.NotificationResponse
 import com.perkantas.perpusptas_new.util.getIntervalFromTimestamp
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
 import java.util.*
 
 class AdapterNotification (var data : ArrayList<NotificationResponse.Data>, private val listener: OnAdapterListener)

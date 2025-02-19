@@ -2,7 +2,7 @@ package com.perkantas.perpusptas_new
 
 object Constants {
     //endpoints
-    const val BASE_URL = "http://10.104.50.107:8000"
+    const val BASE_URL = "https://perpusptassmg.online"
     const val LOGIN_URL = "/api/login"
     const val REGISTER_URL = "/api/register"
     const val PROFILE_URL = "/api/myProfile"

@@ -89,7 +89,6 @@ class LoginActivity : AppCompatActivity() {
         apiClient.getApiService(this).login(LoginRequest(email = email, password = password))
             .enqueue(object : Callback<LoginResponse> {
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Log.e("Response", "Login gagal karena ${t.message}")
                     progressDialog.dismiss()
                     Toast.makeText(this@LoginActivity,"Gagal masuk akun karena ${t.message} ", Toast.LENGTH_SHORT).show()
                 }
@@ -99,7 +98,6 @@ class LoginActivity : AppCompatActivity() {
                         val loginResponse = response.body()
                         if (loginResponse?.statusCode == true && loginResponse.dataLog?.authToken != null) {
                             // Login success
-                            Log.d("Response", "Login successful. AuthToken: ${loginResponse.dataLog.authToken}")
                             sessionManager.saveDataLog(loginResponse.dataLog)
                             progressDialog.dismiss()
                             Toast.makeText(this@LoginActivity, "Berhasil Masuk akun, selamat datang " + loginResponse.dataLog.name, Toast.LENGTH_LONG).show()
@@ -107,14 +105,11 @@ class LoginActivity : AppCompatActivity() {
                             finish()
                         } else {
                             progressDialog.dismiss()
-                            Log.d("Response", "Login failed. Response: ${response.body()}")
                             Toast.makeText(this@LoginActivity, "Gagal masuk akun", Toast.LENGTH_LONG).show()
                         }
                     } else {
                         //response failure untuk salah password/koneksi error/dll
                         progressDialog.dismiss()
-                        Log.d("Response :", "Login failed. Response code: ${response.code()}")
-                        Log.d("Response :", response.raw().toString())
                         Toast.makeText(this@LoginActivity, "Gagal masuk akun. Code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }

@@ -47,15 +47,11 @@ class NotificationDetailActivity : AppCompatActivity() {
 
         apiClient.getApiService(this).sendReadMark(token, idNotification).enqueue(object : Callback<NotificationResponse>{
             override fun onFailure(call: Call<NotificationResponse>, t: Throwable) {
-                Log.e("Response", "Error because of ${t.message}", )
+
             }
 
             override fun onResponse(call: Call<NotificationResponse>, response: Response<NotificationResponse>) {
-                if (response.isSuccessful) {
-                    Log.d("Response", "Success, read_at ${notificationData.read_at}")
-                } else {
-                    Log.e("Response", "Error" )
-                }
+
             }
         })
     }

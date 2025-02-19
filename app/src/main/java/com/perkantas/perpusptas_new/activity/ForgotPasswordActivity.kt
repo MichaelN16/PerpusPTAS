@@ -60,7 +60,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
         apiClient.getApiService(this).passwordReset(email).enqueue(object : Callback<PasswordResetResponse>{
             override fun onFailure(call: Call<PasswordResetResponse>, t: Throwable) {
                 progressDialog.dismiss()
-                Log.e("Failure", "${t.message}")
                 Toast.makeText(this@ForgotPasswordActivity, "Gagal terhubung ke server, silahkan coba lagi", Toast.LENGTH_SHORT).show()
                 finish()
             }

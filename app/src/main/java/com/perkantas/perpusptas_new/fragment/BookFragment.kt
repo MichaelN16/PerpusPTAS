@@ -121,7 +121,7 @@ class BookFragment : Fragment() {
                     listBook = ArrayList(bookResponse.dataBook)
                     showBooks()
                 } else {
-                    Log.e("BookFragment", "BookResponse is null.")
+
                 }
             }
 
@@ -146,7 +146,7 @@ class BookFragment : Fragment() {
                     listBook = ArrayList(bookResponse.dataBook)
                     showBooks()
                 } else {
-                    Log.e("BookFragment", "BookResponse is null.")
+
                 }
             }
 
@@ -157,10 +157,7 @@ class BookFragment : Fragment() {
         })
     }
 
-    private fun showBooks() {
-        // Log the selected category for debugging
-        Log.d("BookFragment", "Selected Category: $category")
-
+    private fun showBooks(){
         // Initialize RecyclerView and Adapter
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -190,7 +187,6 @@ class BookFragment : Fragment() {
                             startActivity(intent)
                         } else {
                             // Go to verification class
-                            Log.d("AdapterBook", "User is not logged in")
                             Toast.makeText(requireContext(), "Silahkan masuk untuk menggunakan fitur ini", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(requireContext(), VerificationActivity::class.java))
                         }
