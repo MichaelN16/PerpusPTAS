@@ -64,7 +64,6 @@ class NotificationFragment : Fragment() {
         apiClient.getApiService(requireContext()).getNotification(token).enqueue(object : Callback<NotificationResponse>{
             override fun onFailure(call: Call<NotificationResponse>, t: Throwable) {
                 binding.progressBar.visibility = View.GONE
-                Log.d(TAG, t.message.toString())
                 Toast.makeText(requireContext(), "Tidak terhubung dengan internet", Toast.LENGTH_SHORT).show()
                 return
             }
@@ -76,7 +75,6 @@ class NotificationFragment : Fragment() {
                 if (response.isSuccessful){
                     listNotification = ArrayList(notificationResponse.data)
                     showNotification()
-                    Log.d(TAG, notificationResponse.toString())
                 } else{
                     Log.d(TAG, notificationResponse.toString())
                 }

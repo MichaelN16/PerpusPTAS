@@ -86,20 +86,17 @@ class BookDetailActivity : AppCompatActivity() {
             .enqueue(object : Callback<ProfileCheckResponse> {
                 override fun onResponse(call: Call<ProfileCheckResponse>, response: Response<ProfileCheckResponse>) {
                     val results = response.body()
-                    Log.d("Response", "Profile check response: $results") // Add this line for debugging
                     if (results?.status == true) {
                         binding.rentBookBtn.setOnClickListener {
                             if(bookData.stock > 0){
                                 val bookId = bookData.id
                                 showRentDetailDialog(bookId)
-                                Log.d("Response", "Profile is completed!")
                             } else {
                                 Toast.makeText(this@BookDetailActivity, "Buku tidak dapat dipinjam karena stok habis!", Toast.LENGTH_SHORT).show()
                             }
 
                         }
                     } else {
-                        Log.d("Response", "Profile not completed yet!")
                         binding.rentBookBtn.setOnClickListener {
                             openAlertDialog()
                         }
@@ -146,16 +143,13 @@ class BookDetailActivity : AppCompatActivity() {
             override fun onResponse(call: Call<RentResponse>, response: Response<RentResponse>) {
                 if (response.isSuccessful){
 
-                    Log.d("Response", "Rent success!")
                     rentSuccessDialog()
                 } else {
-                    Log.d("Response", "Rent failed! ${response.body().toString()}")
                     Toast.makeText(this@BookDetailActivity, "Gagal mengajukan peminjaman karena ${response.body().toString()}", Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<RentResponse>, t: Throwable) {
-                Log.d("Response", "Failed to rent because ${t.message}")
                 Toast.makeText(this@BookDetailActivity, "Proses pengajuan peminjaman gagal karena ${t.message}", Toast.LENGTH_SHORT).show()
             }
 

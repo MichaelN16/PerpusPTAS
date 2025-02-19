@@ -95,7 +95,6 @@ class RentListFragment : Fragment() {
     private fun fetchRentList() {
         rentList.clear()
         val token = "Bearer ${sessionManager.fetchAuthToken()}"
-        Log.d("status", key)
         apiClient.getApiService(requireContext()).getRentList(token, key).enqueue(object : Callback<RentHistoryResponse>{
             override fun onResponse(call: Call<RentHistoryResponse>, response: Response<RentHistoryResponse>) {
                 binding.progressBar.visibility = View.GONE
@@ -107,20 +106,18 @@ class RentListFragment : Fragment() {
                     showRentList()
                 }
                 else{
-                    Log.d("History", "Data is null")
+
                 }
             }
 
             override fun onFailure(call: Call<RentHistoryResponse>, t: Throwable) {
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(requireContext(), "Gagal mengambil data karena ${t.message}", Toast.LENGTH_SHORT).show()
-                Log.e("Error Response",  t.message.toString())
             }
         })
     }
 
     private fun showRentList() {
-        Log.d("RentListFragment", "Selected status : $key")
 
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL

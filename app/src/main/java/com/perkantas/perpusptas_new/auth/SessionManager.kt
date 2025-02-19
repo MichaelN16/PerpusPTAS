@@ -58,7 +58,6 @@ class SessionManager (context: Context) {
         return try {
             Gson().fromJson(json, MyProfileResponse.DataProf::class.java)
         }  catch (e: Exception) {
-            Log.e("SessionManager", "Error deserializing user data: ${e.message}" )
             null
         }
     }

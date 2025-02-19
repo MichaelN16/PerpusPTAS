@@ -64,7 +64,6 @@ class AccountFragment : Fragment() {
             .enqueue(object : Callback<MyProfileResponse> {
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
                     // Error fetching posts
-                    Log.e("Message", "${t.message}")
                     Toast.makeText(requireContext(), "Tidak terhubung dengan internet", Toast.LENGTH_SHORT).show()
                     return
                 }
@@ -74,7 +73,6 @@ class AccountFragment : Fragment() {
                     if (response.isSuccessful) {
                         val profile = response.body()!!.dataProf
                         //val userId = sessionManager.saveUserId(profile)
-                        Log.d("Auth Token", "Bearer ${sessionManager.fetchAuthToken()}")
                         sessionManager.saveUserData(profile)
                         //convert date
                         val formattedDate = dateFormatConverter(profile.birthDate,"dd/MM/yyyy")
@@ -86,7 +84,7 @@ class AccountFragment : Fragment() {
                         binding.birthDateTv.text = formattedDate
                         binding.phoneTv.text = profile.phone
                     } else {
-                        Log.e("AccountFragment", "Profile response is not successful. Code: ${response.code()}")
+
                     }
                 }
             })

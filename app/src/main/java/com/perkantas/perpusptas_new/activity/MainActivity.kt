@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity() {
             .setPositiveButton("Ya") { dialog, which ->
                 sessionManager.deleteAuthToken()
                 sessionManager.clearUserData()
-                Log.d("Response", "Auth token deleted")
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
