@@ -64,15 +64,13 @@ class PasswordChangeActivity : AppCompatActivity() {
 
 
     private fun changePasswordRequest() {
-
-        val token = "Bearer ${sessionManager.fetchAuthToken()}"
         val email = sessionManager.fetchUserData()?.email ?: return
         val passChange = PasswordChangeRequest(email, password,newPassword,cNewPassword)
 
         progressDialog.setMessage("Password sedang diganti...")
         progressDialog.show()
 
-        apiClient.getApiService(this).passwordChange(token,passChange).enqueue(object : Callback<PasswordChangeResponse>{
+        apiClient.getApiService(this).passwordChange(passChange).enqueue(object : Callback<PasswordChangeResponse>{
             override fun onFailure(call: Call<PasswordChangeResponse>, t: Throwable) {
                 progressDialog.dismiss()
                 Toast.makeText(this@PasswordChangeActivity,"Gagal menghubungkan karena ${t.message} ", Toast.LENGTH_SHORT).show()

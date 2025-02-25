@@ -109,11 +109,8 @@ class ProfileEditActivity : AppCompatActivity(), DatePickerFragment.OnDateSelect
             // Create the MyProfileRequest object
             val updateRequest = MyProfileRequest(name, birthPlace, formattedDate, phoneNumber, address, component)
 
-            // Retrieve the authentication token
-            val token = "Bearer ${sessionManager.fetchAuthToken()}"
-
             // Check if the token is not null before making the API call
-            apiClient.getApiService(this).updateUserProfile(token, updateRequest)
+            apiClient.getApiService(this).updateUserProfile(updateRequest)
                 .enqueue(object : Callback<MyProfileResponse> {
                     override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
                         Toast.makeText(this@ProfileEditActivity, "Gagal memperbarui profil karena ${t.message}", Toast.LENGTH_SHORT).show()

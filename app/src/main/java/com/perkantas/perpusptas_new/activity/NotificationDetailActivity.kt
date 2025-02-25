@@ -42,10 +42,9 @@ class NotificationDetailActivity : AppCompatActivity() {
     }
 
     private fun readMark() {
-        val token = "Bearer ${sessionManager.fetchAuthToken()}"
         val idNotification = notificationData.id
 
-        apiClient.getApiService(this).sendReadMark(token, idNotification).enqueue(object : Callback<NotificationResponse>{
+        apiClient.getApiService(this).sendReadMark(idNotification).enqueue(object : Callback<NotificationResponse>{
             override fun onFailure(call: Call<NotificationResponse>, t: Throwable) {
 
             }

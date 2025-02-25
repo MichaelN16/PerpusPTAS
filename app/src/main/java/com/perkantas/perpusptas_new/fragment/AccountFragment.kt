@@ -2,13 +2,11 @@ package com.perkantas.perpusptas_new.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.perkantas.perpusptas_new.activity.ForgotPasswordActivity
 import com.perkantas.perpusptas_new.activity.PasswordChangeActivity
 import com.perkantas.perpusptas_new.activity.ProfileEditActivity
 import com.perkantas.perpusptas_new.model.MyProfileResponse
@@ -59,8 +57,7 @@ class AccountFragment : Fragment() {
     }
 
     private fun fetchProfile() {
-        // Pass the token as parameter
-        apiClient.getApiService(requireContext()).getUserProfile(token = "Bearer ${sessionManager.fetchAuthToken()}")
+        apiClient.getApiService(requireContext()).getUserProfile()
             .enqueue(object : Callback<MyProfileResponse> {
                 override fun onFailure(call: Call<MyProfileResponse>, t: Throwable) {
                     // Error fetching posts

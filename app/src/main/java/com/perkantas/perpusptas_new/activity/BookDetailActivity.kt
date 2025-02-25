@@ -28,7 +28,6 @@ class BookDetailActivity : AppCompatActivity() {
     private lateinit var apiClient: ApiClient
     private lateinit var sessionManager: SessionManager
     private lateinit var bookData: BookResponse.DataBook
-    private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +39,6 @@ class BookDetailActivity : AppCompatActivity() {
 
         // Check if the user is logged in
         if (sessionManager.isLoggedIn()) {
-            token = "Bearer ${sessionManager.fetchAuthToken()}"
-
             // Fetch the user profile and book data
             userProfileCheck()
         } else {
@@ -82,7 +79,7 @@ class BookDetailActivity : AppCompatActivity() {
     }
 
     private fun userProfileCheck() {
-        apiClient.getApiService(this).checkUserProfile(token)
+        apiClient.getApiService(this).checkUserProfile()
             .enqueue(object : Callback<ProfileCheckResponse> {
                 override fun onResponse(call: Call<ProfileCheckResponse>, response: Response<ProfileCheckResponse>) {
                     val results = response.body()
@@ -139,7 +136,7 @@ class BookDetailActivity : AppCompatActivity() {
 
     private fun sendRentRequest(bookId: Int) {
         val rentRequest = RentRequest(bookId)
-        apiClient.getApiService(this).rentRequest(token, rentRequest).enqueue(object : Callback<RentResponse>{
+        apiClient.getApiService(this).rentRequest(rentRequest).enqueue(object : Callback<RentResponse>{
             override fun onResponse(call: Call<RentResponse>, response: Response<RentResponse>) {
                 if (response.isSuccessful){
 
