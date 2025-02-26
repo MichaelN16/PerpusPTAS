@@ -27,7 +27,6 @@ class NotificationFragment : Fragment() {
     private lateinit var apiClient: ApiClient
     private lateinit var rvNotification:RecyclerView
     private lateinit var adapterNotification: AdapterNotification
-    val TAG = "Notification Fragment"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,10 +57,9 @@ class NotificationFragment : Fragment() {
 
     private fun fetchNotification() {
         listNotification.clear()
-        val token = "Bearer ${sessionManager.fetchAuthToken()}"
 
 
-        apiClient.getApiService(requireContext()).getNotification(token).enqueue(object : Callback<NotificationResponse>{
+        apiClient.getApiService(requireContext()).getNotification().enqueue(object : Callback<NotificationResponse>{
             override fun onFailure(call: Call<NotificationResponse>, t: Throwable) {
                 binding.progressBar.visibility = View.GONE
                 Toast.makeText(requireContext(), "Tidak terhubung dengan internet", Toast.LENGTH_SHORT).show()
@@ -76,7 +74,7 @@ class NotificationFragment : Fragment() {
                     listNotification = ArrayList(notificationResponse.data)
                     showNotification()
                 } else{
-                    Log.d(TAG, notificationResponse.toString())
+                    Log.d("Notification Fragment", notificationResponse.toString())
                 }
             }
         })

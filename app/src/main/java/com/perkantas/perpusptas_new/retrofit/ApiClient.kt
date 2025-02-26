@@ -15,37 +15,33 @@ class ApiClient {
     private lateinit var apiService: ApiService
 
     fun getApiService(context: Context): ApiService {
-
-        val interceptor = HttpLoggingInterceptor()
-        interceptor.level = HttpLoggingInterceptor.Level.BODY
-
-        val client: OkHttpClient = OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .addInterceptor(AuthInterceptor(context))
-            .connectTimeout(40, TimeUnit.SECONDS)
-            .readTimeout(40, TimeUnit.SECONDS)
-            .writeTimeout(40, TimeUnit.SECONDS)
-            .build()
-
         val gson = GsonBuilder()
             .setLenient()
             .create()
 
         //Initialize ApiService if not initialized yet
-        if(!::apiService.isInitialized){
+        if (!::apiService.isInitialized) {
             val retrofit = Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .client(client) //use okhttpclient
+                .client(okhttpClient(context))
                 .build()
 
             apiService = retrofit.create(ApiService::class.java)
         }
         return apiService
     }
-}
-    /*private fun okhttpClient(context: Context): OkHttpClient{
+
+    private fun okhttpClient(context: Context): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+
         return OkHttpClient.Builder()
+            .addInterceptor(interceptor)
             .addInterceptor(AuthInterceptor(context))
+            .connectTimeout(40, TimeUnit.SECONDS)
+            .readTimeout(40, TimeUnit.SECONDS)
+            .writeTimeout(40, TimeUnit.SECONDS)
             .build()
-    }*/
+    }
+}

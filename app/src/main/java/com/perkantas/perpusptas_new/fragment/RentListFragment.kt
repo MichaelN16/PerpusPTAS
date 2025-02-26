@@ -94,8 +94,7 @@ class RentListFragment : Fragment() {
 
     private fun fetchRentList() {
         rentList.clear()
-        val token = "Bearer ${sessionManager.fetchAuthToken()}"
-        apiClient.getApiService(requireContext()).getRentList(token, key).enqueue(object : Callback<RentHistoryResponse>{
+        apiClient.getApiService(requireContext()).getRentList(key).enqueue(object : Callback<RentHistoryResponse>{
             override fun onResponse(call: Call<RentHistoryResponse>, response: Response<RentHistoryResponse>) {
                 binding.progressBar.visibility = View.GONE
                 val rentHistory = response.body()!!.data

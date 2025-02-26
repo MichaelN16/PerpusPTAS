@@ -6,6 +6,7 @@ import okhttp3.Response
 
 class AuthInterceptor (context: Context) : Interceptor {
     private val sessionManager = SessionManager(context)
+    //TODO: Implement this each request token based
 
     override fun intercept(chain: Interceptor.Chain): Response{
         val requestBuilder = chain.request().newBuilder()

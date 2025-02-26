@@ -20,7 +20,7 @@ interface ApiService {
 
     // get user profile
     @GET(Constants.PROFILE_URL)
-    fun getUserProfile(@Header("Authorization") token: String): Call<MyProfileResponse>
+    fun getUserProfile(): Call<MyProfileResponse>
 
     //get category for viewPager tab
     @GET(Constants.CATEGORY_URL)
@@ -29,37 +29,30 @@ interface ApiService {
     //update user info
     @POST(Constants.PROFILE_URL)
     fun updateUserProfile(
-        @Header("Authorization") token: String,
         @Body request: MyProfileRequest): Call<MyProfileResponse>
 
     //check user profile is filled or not
     @GET(Constants.PROFILE_CHECK)
-    fun checkUserProfile(
-        @Header("Authorization") token:String): Call<ProfileCheckResponse>
+    fun checkUserProfile(): Call<ProfileCheckResponse>
 
     @POST(Constants.RENT_URL)
     fun rentRequest(
-        @Header("Authorization") token: String,
         @Body request: RentRequest): Call<RentResponse>
 
     @GET(Constants.RENT_URL)
     fun getRentList(
-        @Header("Authorization") token: String,
         @Query("type") type: String
     ): Call<RentHistoryResponse> //query status
 
     @GET(Constants.NOTIFICATION_URL)
-    fun getNotification(
-        @Header("Authorization") token: String): Call<NotificationResponse>
+    fun getNotification(): Call<NotificationResponse>
 
     @POST(Constants.NOTIFICATION_URL_READ)
     fun sendReadMark(
-        @Header("Authorization") token:String,
         @Path("id") notificationId: String) : Call<NotificationResponse>
 
     @POST(Constants.PASSWORD_CHANGE_URL)
     fun passwordChange(
-        @Header("Authorization") token:String,
         @Body request: PasswordChangeRequest) : Call<PasswordChangeResponse>
 
     @FormUrlEncoded
