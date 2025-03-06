@@ -88,8 +88,16 @@ class BookFragment : Fragment() {
                 // Not needed
             }
         })
+        setSwipeRefresh()
 
         return binding.root
+    }
+
+    private fun setSwipeRefresh() {
+        binding.swipeToRefresh.setOnRefreshListener {
+            loadBooks()
+            binding.swipeToRefresh.isRefreshing = false
+        }
     }
 
     override fun onResume() {
