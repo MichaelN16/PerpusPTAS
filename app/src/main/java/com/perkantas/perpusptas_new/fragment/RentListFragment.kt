@@ -82,7 +82,16 @@ class RentListFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
+        setSwipeRefresh()
+
         return binding.root
+    }
+
+    private fun setSwipeRefresh() {
+        binding.swipeToRefresh.setOnRefreshListener {
+            fetchRentList()
+            binding.swipeToRefresh.isRefreshing = false
+        }
     }
 
     override fun onResume() {

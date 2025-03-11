@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_to_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     tools:context=".fragment.BookFragment">
 
-    <!-- Search -->
-    <EditText
-        android:id="@+id/searchEt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/white"
-        android:drawableStart="@drawable/ic_search_gray"
-        android:hint="Cari"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textColorHint="@color/gray01"/>
-
-    <!-- ProgressBar for loading indicator -->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
-
-    <!--RecycleView: Load Books-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/booksRv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_book_list" />
+        android:orientation="vertical">
+        <!-- Search -->
+        <EditText
+            android:id="@+id/searchEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/white"
+            android:drawableStart="@drawable/ic_search_gray"
+            android:hint="Cari"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray01"/>
 
-    <TextView
-        android:id="@+id/noItemTv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Tidak ada daftar disini"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:visibility="gone"/>
+        <!-- ProgressBar for loading indicator -->
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone" />
 
-</LinearLayout>
+        <!--RecycleView: Load Books-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/booksRv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_book_list" />
+
+        <TextView
+            android:id="@+id/noItemTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Tidak ada daftar disini"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

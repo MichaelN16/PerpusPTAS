@@ -44,8 +44,16 @@ class NotificationFragment : Fragment() {
         progressBar.visibility = View.VISIBLE
 
         fetchNotification()
+        setSwipeRefresh()
 
         return view
+    }
+
+    private fun setSwipeRefresh() {
+        binding.swipeToRefresh.setOnRefreshListener {
+            fetchNotification()
+            binding.swipeToRefresh.isRefreshing = false
+        }
     }
 
     override fun onResume() {
